@@ -1,0 +1,10 @@
+name: 'Test Party 2'
+characters:
+    - name: 'Party 2 Human'
+      race: 'Human'
+      items:
+      - 'Test Sword'
+    - name: 'Party 2 Orc'
+      race: 'Orc'
+      items:
+      - 'Test Sword'

@@ -1,0 +1,4 @@
+theorycraft/bin/*
+*.userprefs
+**/packages/*
+*.nupkg

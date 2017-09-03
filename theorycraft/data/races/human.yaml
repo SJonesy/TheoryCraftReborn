@@ -1,0 +1,20 @@
+name: 'Human'
+size: 'Medium'
+points: 0
+slots: ['head', 'neck', 'torso', 'arms', 'hands', 'primary', 'secondary', 'finger1', 'finger2', 'waist', 'legs', 'feet']
+abilities: []
+stats:
+    strength: 10
+    dexterity: 10
+    wisdom: 10
+    charisma: 10
+    intelligence: 10
+    constitution: 10
+resists:
+    magic: 0.0
+    fire: 0.0
+    cold: 0.0
+    holy: 0.0
+    necrotic: 0.0
+    psionic: 0.0
+    poison: 0.0

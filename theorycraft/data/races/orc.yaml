@@ -1,0 +1,20 @@
+name: 'Orc'
+size: 'Medium'
+points: 5
+slots: [head, neck, torso, arms, primary, secondary, finger1, finger2, waist, legs, feet, hands]
+abilities: []
+stats:
+    strength: 16
+    dexterity: 9
+    wisdom: 9
+    charisma: 8
+    intelligence: 6
+    constitution: 15
+resists:
+    magic: 0.1
+    fire: 0.0
+    cold: 0.0
+    holy: 0.0
+    necrotic: 0.0
+    psionic: 0.0
+    poison: 0.0
