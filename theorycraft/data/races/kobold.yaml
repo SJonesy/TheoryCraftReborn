@@ -1,0 +1,20 @@
+name: 'Kobold'
+size: 'Small'
+points: 5
+slots: ['head', 'neck', 'torso', 'arms', 'hands', 'primary', 'secondary', 'finger', 'waist', 'legs', 'feet']
+abilities: []
+stats:
+    strength: 6
+    dexterity: 8
+    wisdom: 6
+    charisma: 2
+    intelligence: 4
+    constitution: 7
+resists:
+    magic: 0.0
+    fire: 0.0
+    cold: 0.0
+    holy: 0.0
+    necrotic: 0.0
+    psionic: 0.0
+    poison: 0.0

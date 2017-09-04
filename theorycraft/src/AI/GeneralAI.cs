@@ -28,7 +28,7 @@ namespace theorycraft
 				return new Action(Actor, FindLowestHPTarget(), directDamageAbility);
 
 			Ability meleeAbility = GetMeleeAbility();
-			Character meleeTarget = FindLowestHPMeleeTarget ();
+			Character meleeTarget = FindLowestHPMeleeTarget();
 			if (meleeAbility != null && meleeTarget != null)
 				return new Action(Actor, meleeTarget, meleeAbility);
 

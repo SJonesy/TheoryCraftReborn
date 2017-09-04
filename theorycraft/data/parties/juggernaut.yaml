@@ -1,0 +1,24 @@
+name: 'Juggernaut'
+characters:
+    - name: 'The Juggernaut'
+      race: 'Orc'
+      row: Front
+      items:
+      - 'Iron Sword'
+      - 'Iron Shield'
+      - 'Iron Breastplate'
+      - 'Iron Legplates'
+      - 'Belt of Giant Strength'
+      - 'Boots of Haste'
+      - 'Amulet of Resistance'
+      - 'Ring of Minor Protection'
+    - name: 'Healer'
+      race: 'Orc'
+      row: Middle
+      items:
+      - 'Holy Scepter'
+    - name: 'Healer'
+      race: 'Orc'
+      row: Middle
+      items:
+      - 'Holy Scepter'

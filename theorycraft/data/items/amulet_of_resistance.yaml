@@ -1,0 +1,12 @@
+name: 'Amulet of Resistance'
+points: 25
+slots: ['neck']
+abilities: []
+resists:
+    magic: 0.25
+    fire: 0.25
+    cold: 0.25
+    holy: 0.25
+    necrotic: 0.25
+    psionic: 0.25
+    poison: 0.25

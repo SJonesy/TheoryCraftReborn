@@ -1,0 +1,39 @@
+name: 'Nukers'
+characters:
+    - name: 'Front Line Dummy'
+      race: 'Human'
+      row: Front
+      items:
+      - 'Iron Dagger'
+      - 'Iron Shield'
+      - 'Ring of Minor Protection'
+    - name: 'MM Bot'
+      race: 'Human'
+      row: Back
+      items:
+      - 'Tomb of Magic Missile'
+    - name: 'MM Bot'
+      race: 'Human'
+      row: Back
+      items:
+      - 'Tomb of Magic Missile'
+    - name: 'MM Bot'
+      race: 'Human'
+      row: Back
+      items:
+      - 'Tomb of Magic Missile'
+    - name: 'MM Bot'
+      race: 'Human'
+      row: Back
+      items:
+      - 'Tomb of Magic Missile'
+    - name: 'MM Bot'
+      race: 'Human'
+      row: Back
+      items:
+      - 'Tomb of Magic Missile'
+    - name: 'MM Bot'
+      race: 'Human'
+      row: Back
+      items:
+      - 'Tomb of Magic Missile'

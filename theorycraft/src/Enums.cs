@@ -53,5 +53,26 @@ namespace theorycraft
 		Middle,
 		Back
 	}
+
+	public enum Resist
+	{
+		Magic,
+		Fire,
+		Cold,
+		Holy,
+		Necrotic,
+		Psionic,
+		Poison
+	}
+
+	public enum Stat
+	{
+		Strength,
+		Dexterity,
+		Wisdom,
+		Charisma,
+		Intelligence,
+		Constitution
+	}
 }
 

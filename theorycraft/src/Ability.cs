@@ -16,6 +16,7 @@ namespace theorycraft
 		public string BackgroundColor { get; set; }
 		public bool Beneficial { get; set; }
 		public bool PartyTarget { get; set; }
+		public Resist ResistType { get; set; }
 
 		public override string ToString ()
 		{

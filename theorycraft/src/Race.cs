@@ -10,7 +10,7 @@ namespace theorycraft
 		public Sizes Size { get; set;}
 		public List<Slot> Slots { get; set; }
 		public List<String> Abilities { get; set; }
-		public Stat Stats { get; set; }
-		public Resist Resists { get; set; }
+		public Dictionary<Stat, int> Stats { get; set; }
+		public Dictionary<Resist, float> Resists { get; set; }
 	}
 }

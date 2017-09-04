@@ -21,8 +21,8 @@ namespace theorycraft
 		public int MaxMana { get; set; }
 		public int ManaRegen { get; set; }
 		public int MaxStamina { get; set; }
-		public Stat BaseStats { get; set; }
-		public Resist BaseResists { get; set; }
+		public Dictionary<Stat, int> BaseStats { get; set; }
+		public Dictionary<Resist, float> BaseResists { get; set; }
 		public AI AI { get; set; }
 		public Row Row { get; set; }
 		public int AC { get; set; }
@@ -32,14 +32,14 @@ namespace theorycraft
 		public int Mana { get; set; }
 		public int Stamina { get; set; }
 		public int Initiative { get; set; }
-		public Stat Stats { get; set; }
-		public Resist Resists { get; set; }
+		public Dictionary<Stat, int> Stats { get; set; }
+		public Dictionary<Resist, float> Resists { get; set; }
 		public Boolean Alive { get; set; }
 		public List<Effect> Effects { get; set; }
 
 		public Character () { }
 
-		public Character (string name, string raceName, List<string> items)
+		public Character (string name, string raceName, List<string> items, Row row)
 		{
 			var racePath = "data/races/";
 			var itemPath = "data/items/";
@@ -62,19 +62,13 @@ namespace theorycraft
 			this.Race = race.Name;
 			this.Slots = race.Slots;
 			this.Size = race.Size;
-			this.BaseResists = race.Resists;
-			this.Resists = race.Resists;
 			this.BaseStats = race.Stats;
-			this.Stats = race.Stats;
+			this.BaseResists = race.Resists;
 			this.PointCost += race.Points;
 			this.Abilities = new List<Ability>();
 			this.Inventory = new SortedDictionary<Slot, string>();
-			this.MaxHitpoints = (race.Stats.Constitution * 4) + 50;
-			this.MaxMana = (race.Stats.Intelligence * 2) + (race.Stats.Wisdom * 2) + 25;
-			this.Mana = MaxMana;
-			this.ManaRegen = (int)Math.Round((double)(race.Stats.Intelligence / 10));
 			this.Alive = true;
-			this.Hitpoints = this.MaxHitpoints;
+			this.Row = row;
 
 			//TODO: load AI choice
 			this.AI = new GeneralAI();
@@ -92,6 +86,17 @@ namespace theorycraft
 					.WithNamingConvention(new CamelCaseNamingConvention())
 					.Build();
 				var gear = deserializer.Deserialize<Item>(yaml);
+
+				if (gear.Resists != null) {
+					foreach (KeyValuePair<Resist, float> resist in gear.Resists) {
+						this.BaseResists[resist.Key] += resist.Value;
+					}
+				}
+				if (gear.Stats != null) {
+					foreach (KeyValuePair<Stat, int> stat in gear.Stats) {
+						this.BaseStats[stat.Key] += stat.Value;
+					}
+				}
 
 				Boolean availableSlot = true;
 
@@ -114,6 +119,15 @@ namespace theorycraft
 					}
 				}
 			}
+
+			this.Resists = this.BaseResists;
+			this.Stats = this.BaseStats;
+			this.MaxHitpoints = (this.Stats[Stat.Constitution] * 4) + 50;
+			this.Hitpoints = this.MaxHitpoints;
+			this.MaxMana = (this.Stats[Stat.Intelligence] * 2) + (this.Stats[Stat.Wisdom] * 2) + 25;
+			this.Mana = MaxMana;
+			this.ManaRegen = (int)Math.Round((double)(this.Stats[Stat.Wisdom] / 10));
+			this.AC += this.Stats[Stat.Dexterity] / 4;
 		}
 
 		private Ability LoadAbility(string abil) {
@@ -132,8 +146,8 @@ namespace theorycraft
 			output =  String.Format("Name: {0} \t Race: {1} \t Size {2} \t Point Cost: {3}\n", this.Name, this.Race, this.Size, this.PointCost);
 			output += String.Format("Abilities: {0}\n", string.Join(", ", this.Abilities));
 			output += String.Format("HP:{0}/{0} MP:{1}/{1} SP:{2}/{2}\n", this.MaxHitpoints, this.MaxMana, this.MaxStamina);
-			output += String.Format("Stats: {0}STR {1}CON {2}CHA {3}WIS {4}DEX {5}INT\n", this.Stats.Strength, this.Stats.Constitution, this.Stats.Charisma, this.Stats.Wisdom, this.Stats.Dexterity, this.Stats.Intelligence);
-			output += String.Format("Resists: {0}MAG {1}COL {2}FIR {3}HOL {4}NEC {5}POI {6}PSI\n", this.Resists.Magic, this.Resists.Cold, this.Resists.Fire, this.Resists.Holy, this.Resists.Necrotic, this.Resists.Poison, this.Resists.Psionic);
+			output += String.Format("Stats: {0}STR {1}CON {2}CHA {3}WIS {4}DEX {5}INT\n", this.Stats[Stat.Strength], this.Stats[Stat.Constitution], this.Stats[Stat.Charisma], this.Stats[Stat.Wisdom], this.Stats[Stat.Dexterity], this.Stats[Stat.Intelligence]);
+			output += String.Format("Resists: {0}MAG {1}COL {2}FIR {3}HOL {4}NEC {5}POI {6}PSI\n", this.Resists[Resist.Magic], this.Resists[Resist.Cold], this.Resists[Resist.Fire], this.Resists[Resist.Holy], this.Resists[Resist.Necrotic], this.Resists[Resist.Poison], this.Resists[Resist.Psionic]);
 			output += String.Format("Equipment:\n");
 
 			foreach (var kvp in this.Inventory) {

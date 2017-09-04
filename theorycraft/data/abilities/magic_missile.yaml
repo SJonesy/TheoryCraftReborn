@@ -1,9 +1,10 @@
 name: 'Magic Missile'
 type: 'DirectDamage'
-power: 14
+power: 8
 mana: 8
 effects: []
 beneficial: false
 partyTarget: false
 text: "a bolt of purple energy shoots from @actor's extended finger and slams @target in the chest for @damage damage."
 textColor: 'darkmagenta'
+resistType: 'magic'

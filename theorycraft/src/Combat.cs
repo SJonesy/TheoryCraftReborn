@@ -38,7 +38,7 @@ namespace theorycraft
 				Console.WriteLine ("*** ROUND " + roundCount.ToString() + " ***");
 				// Roll Initiative
 				foreach (var combatant in combatants) {
-					int maxInitiative = combatant.Stats.Dexterity * 5;
+					int maxInitiative = combatant.Stats[Stat.Dexterity] * 5;
 					combatant.Initiative = rand.Next(maxInitiative);
 				}
 				// Sort Combatants by Initiative 
@@ -68,18 +68,18 @@ namespace theorycraft
 
 					switch (action.Ability.Type) {
 						case AbilityType.Melee:
-							int minDamage = combatant.Stats.Strength; 
-							int maxDamage = combatant.Stats.Strength + action.Ability.Power;
+							int minDamage = combatant.Stats[Stat.Strength]; 
+							int maxDamage = combatant.Stats[Stat.Strength] + action.Ability.Power;
 							DoSingleDamage (action, minDamage, maxDamage, rand);
 							break;
 						case AbilityType.DirectDamage:
 							minDamage = action.Ability.Power;
-							maxDamage = combatant.Stats.Intelligence + action.Ability.Power;
+							maxDamage = combatant.Stats[Stat.Intelligence] + action.Ability.Power;
 							DoSingleDamage (action, minDamage, maxDamage, rand);
 							break;
 						case AbilityType.DirectHealing:
 							int minHeal = action.Ability.Power;
-							int maxHeal = combatant.Stats.Wisdom + action.Ability.Power;
+							int maxHeal = combatant.Stats[Stat.Wisdom] + action.Ability.Power;
 							DoSingleHealing (action, minHeal, maxHeal, rand);
 							break;
 					}
@@ -135,10 +135,15 @@ namespace theorycraft
 			int damage = rand.Next(minDamage, maxDamage);
 			if (action.Ability.Type == AbilityType.Melee)
 				damage -= action.TargetCharacter.AC;
-			if (damage <= 0)
-				damage = 1;
 			if (action.Ability.Mana > 0)
 				action.Actor.Mana -= action.Ability.Mana;
+			if (action.Ability.Type == AbilityType.DirectDamage) {
+				float resist;
+				action.TargetCharacter.Resists.TryGetValue(action.Ability.ResistType, out resist);
+				damage -= (int)(resist * damage);
+			}
+			if (damage <= 0)
+				damage = 1;
 			action.TargetCharacter.Hitpoints -= damage;
 			Console.ForegroundColor = GetColor(action.Ability.TextColor);
 			if (action.Ability.BackgroundColor != null)
@@ -178,7 +183,7 @@ namespace theorycraft
 				string output = String.Format ("{0}: ", party.Name);
 				foreach (Character character in party.CharacterList) {
 					if (character.Alive)
-						output += String.Format("{0}[{1}/{2}hp {3}/{4}mp] ", character.Name, character.Hitpoints, character.MaxHitpoints, character.Mana, character.MaxMana);
+						output += String.Format("[{0} {1}/{2}hp {3}/{4}mp] ", character.Name, character.Hitpoints, character.MaxHitpoints, character.Mana, character.MaxMana);
 				}
 				Console.WriteLine(output);
 			}
