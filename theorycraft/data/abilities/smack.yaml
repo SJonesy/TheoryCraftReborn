@@ -1,0 +1,8 @@
+name: 'Smack'
+type: 'Melee'
+power: 5
+effects: []
+beneficial: false
+partyTarget: false
+text: '@actor swings his weapon and smacks @target for @damage damage.'
+textColor: 'darkgray'

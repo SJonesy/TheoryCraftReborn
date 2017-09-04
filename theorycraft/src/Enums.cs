@@ -13,6 +13,7 @@ namespace theorycraft
 		Secondary,
 		Finger1,
 		Finger2,
+		Finger,
 		Waist,
 		Legs,
 		Feet
@@ -26,7 +27,8 @@ namespace theorycraft
 		Buff,
 		GroupBuff,
 		GroupHealing,
-		GroupDamage
+		GroupDamage,
+		Custom
 	}
 
 	public enum Sizes
@@ -43,6 +45,13 @@ namespace theorycraft
 	{
 		Poison,
 		Aegis
+	}
+
+	public enum Row
+	{
+		Front,
+		Middle,
+		Back
 	}
 }
 

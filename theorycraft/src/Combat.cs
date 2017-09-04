@@ -14,21 +14,28 @@ namespace theorycraft
 
 		public Party Duel(List<Party> parties) {
 			// Initialize Combatants
+			string output = "";
+			int longestString = 0;
 			for (var i = 0; i < parties.Count; i++) {
 				foreach (var character in parties[i].CharacterList) {
 					character.PartyId = i;
-					character.Hitpoints = character.MaxHitpoints;
-					character.AI = new RandomAI();
 					this.combatants.Add(character);
 				}
+				string currentString = String.Format("{0}: total point cost is {1}\n", parties[i].Name, parties[i].PointCost());
+				if (currentString.Length > longestString)
+					longestString = currentString.Length;
+				output += currentString;
 			}
-
-			Party winner = null;
+			Console.WriteLine(new String('=', longestString));
+			Console.Write(output);
+			Console.WriteLine(new String('=', longestString));
 
 			// Round
+			Party winner = null;
+			int roundCount = 1;
 			while (winner == null) {
 				Random rand = new Random();
-
+				Console.WriteLine ("*** ROUND " + roundCount.ToString() + " ***");
 				// Roll Initiative
 				foreach (var combatant in combatants) {
 					int maxInitiative = combatant.Stats.Dexterity * 5;
@@ -38,8 +45,11 @@ namespace theorycraft
 				combatants.Sort();
 				// Loop through combatants
 				foreach (var combatant in combatants) {
-					if (combatant.Hitpoints <= 0)
+					if (!combatant.Alive)
 						continue;
+
+					if (combatant.Mana < combatant.MaxMana)
+						combatant.Mana += combatant.ManaRegen;
 
 					Party friendlyParty = null;
 					Party hostileParty = null;
@@ -52,37 +62,64 @@ namespace theorycraft
 
 					// Do an ability
 					Action action = combatant.AI.ChooseAction (combatant, friendlyParty, hostileParty);
-					Console.WriteLine (action.TargetCharacter.Hitpoints);
+
+					if (action == null)
+						continue;
+
 					switch (action.Ability.Type) {
 						case AbilityType.Melee:
 							int minDamage = combatant.Stats.Strength; 
-							int maxDamage = combatant.Stats.Strength + action.Ability.Damage ?? default(int);
+							int maxDamage = combatant.Stats.Strength + action.Ability.Power;
 							DoSingleDamage (action, minDamage, maxDamage, rand);
 							break;
+						case AbilityType.DirectDamage:
+							minDamage = action.Ability.Power;
+							maxDamage = combatant.Stats.Intelligence + action.Ability.Power;
+							DoSingleDamage (action, minDamage, maxDamage, rand);
+							break;
+						case AbilityType.DirectHealing:
+							int minHeal = action.Ability.Power;
+							int maxHeal = combatant.Stats.Wisdom + action.Ability.Power;
+							DoSingleHealing (action, minHeal, maxHeal, rand);
+							break;
 					}
-					Console.WriteLine (action.TargetCharacter.Hitpoints);
+
+					// Check for victory
+					List<Party> deadPartyList = new List<Party> ();
+					foreach (var party in parties) {
+						if (party.CharacterList.Find(x => x.Hitpoints > 0) == null) {
+							deadPartyList.Add(party);
+						}
+					}
+					if (deadPartyList.Count == parties.Count - 1) {
+						foreach (var party in parties) {
+							if (deadPartyList.Contains(party))
+								continue;
+							Console.BackgroundColor = ConsoleColor.DarkGreen;
+							Console.ForegroundColor = ConsoleColor.Green;
+							Console.Write("The winner is " + party.Name);
+							Console.ResetColor();
+							Console.Write("\n");
+							winner = party;
+							DisplayMatchup(parties);
+							return winner;
+						}
+					}
+					else if (deadPartyList.Count == parties.Count) {
+						Console.WriteLine("The match is a draw");
+						DisplayMatchup(parties);
+						winner = new Party();
+						return winner;
+					}
 				}
 
-				// Check for victory
-				int deadPartyCount = 0;
-				List<Party> deadPartyList = new List<Party> ();
-				foreach (var party in parties) {
-					if (party.CharacterList.Find(x => x.Hitpoints > 0) == null) {
-						deadPartyCount++;
-						deadPartyList.Add(party);
-					}
-				}
-				if (deadPartyCount == parties.Count - 1) {
-					foreach (var party in parties) {
-						if (deadPartyList.Contains(party))
-						    continue;
-						Console.WriteLine("The winner is" + party.Name);
-						return party;
-					}
-				}
-				if (deadPartyCount == parties.Count) {
-					Console.WriteLine("Match is a draw");
-					return new Party();
+				DisplayMatchup(parties);
+
+				roundCount++;
+				// TODO: make Round Limit configurable
+				if (roundCount == 500) {
+					Console.WriteLine ("Round limit hit");
+					return new Party ();
 				}
 			}
 
@@ -96,6 +133,12 @@ namespace theorycraft
 
 		private void DoSingleDamage(Action action, int minDamage, int maxDamage, Random rand) {
 			int damage = rand.Next(minDamage, maxDamage);
+			if (action.Ability.Type == AbilityType.Melee)
+				damage -= action.TargetCharacter.AC;
+			if (damage <= 0)
+				damage = 1;
+			if (action.Ability.Mana > 0)
+				action.Actor.Mana -= action.Ability.Mana;
 			action.TargetCharacter.Hitpoints -= damage;
 			Console.ForegroundColor = GetColor(action.Ability.TextColor);
 			if (action.Ability.BackgroundColor != null)
@@ -105,47 +148,77 @@ namespace theorycraft
 				.Replace("@target", action.TargetCharacter.Name)
 				.Replace("@damage", damage.ToString());
 			Console.WriteLine(output);
-			Console.ResetColor ();
+			Console.ResetColor();
+			if (action.TargetCharacter.Hitpoints <= 0) {
+				action.TargetCharacter.Alive = false;
+				Console.ForegroundColor = ConsoleColor.DarkRed;
+				Console.WriteLine("{0} has died.", action.TargetCharacter.Name);
+				Console.ResetColor();
+			}
+		}
+
+		private void DoSingleHealing(Action action, int minHealing, int maxHealing, Random rand) {
+			int healing = rand.Next(minHealing, maxHealing);
+			if (action.Ability.Mana > 0)
+				action.Actor.Mana -= action.Ability.Mana;
+			action.TargetCharacter.Hitpoints += healing;
+			Console.ForegroundColor = GetColor(action.Ability.TextColor);
+			if (action.Ability.BackgroundColor != null)
+				Console.BackgroundColor = GetColor(action.Ability.BackgroundColor);
+			string output = action.Ability.Text
+				.Replace("@actor", action.Actor.Name)
+				.Replace("@target", action.TargetCharacter.Name)
+				.Replace("@healing", healing.ToString());
+			Console.WriteLine(output);
+			Console.ResetColor();
+		}
+
+		private void DisplayMatchup(List<Party> parties) {
+			foreach (Party party in parties) {
+				string output = String.Format ("{0}: ", party.Name);
+				foreach (Character character in party.CharacterList) {
+					if (character.Alive)
+						output += String.Format("{0}[{1}/{2}hp {3}/{4}mp] ", character.Name, character.Hitpoints, character.MaxHitpoints, character.Mana, character.MaxMana);
+				}
+				Console.WriteLine(output);
+			}
 		}
 
 		private ConsoleColor GetColor(string color) {
-			if (color == "gray" || color == "grey")
-				return ConsoleColor.Gray;
-			
-			return ConsoleColor.White;
-			//    All the foreground colors except DarkCyan, the background color:
-			//       The foreground color is Black.
-			//       The foreground color is DarkBlue.
-			//       The foreground color is DarkGreen.
-			//       The foreground color is DarkRed.
-			//       The foreground color is DarkMagenta.
-			//       The foreground color is DarkYellow.
-			//       The foreground color is Gray.
-			//       The foreground color is DarkGray.
-			//       The foreground color is Blue.
-			//       The foreground color is Green.
-			//       The foreground color is Cyan.
-			//       The foreground color is Red.
-			//       The foreground color is Magenta.
-			//       The foreground color is Yellow.
-			//       The foreground color is White.
-			//    
-			//    All the background colors except White, the foreground color:
-			//       The background color is Black.
-			//       The background color is DarkBlue.
-			//       The background color is DarkGreen.
-			//       The background color is DarkCyan.
-			//       The background color is DarkRed.
-			//       The background color is DarkMagenta.
-			//       The background color is DarkYellow.
-			//       The background color is Gray.
-			//       The background color is DarkGray.
-			//       The background color is Blue.
-			//       The background color is Green.
-			//       The background color is Cyan.
-			//       The background color is Red.
-			//       The background color is Magenta.
-			//       The background color is Yellow.
+			switch (color.ToLower()) {
+				case "black":
+					return ConsoleColor.Black;
+				case "darkblue":
+					return ConsoleColor.DarkBlue;
+				case "darkcyan":
+					return ConsoleColor.DarkCyan;
+				case "darkgreen":
+					return ConsoleColor.DarkGreen;
+				case "darkred":
+					return ConsoleColor.DarkRed;
+				case "darkmagenta":
+					return ConsoleColor.DarkMagenta;
+				case "darkyellow":
+					return ConsoleColor.DarkYellow;
+				case "darkgray":
+					return ConsoleColor.DarkGray;
+				case "blue":
+					return ConsoleColor.Blue;
+				case "green":
+					return ConsoleColor.Green;
+				case "cyan":
+					return ConsoleColor.Cyan;
+				case "red":
+					return ConsoleColor.Red;
+				case "magenta":
+					return ConsoleColor.Magenta;
+				case "yellow":
+					return ConsoleColor.Yellow;
+				case "white":
+					return ConsoleColor.White;
+				default:
+					return ConsoleColor.Gray;
+			}
 		}
 	}
 }

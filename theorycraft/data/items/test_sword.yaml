@@ -1,4 +1,4 @@
 name: 'Test Sword'
-points: 0
+points: 1
 slots: ['primary', 'hands']
 abilities: ['slash']

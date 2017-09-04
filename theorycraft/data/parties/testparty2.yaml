@@ -1,10 +1,36 @@
-name: 'Test Party 2'
+name: 'Human Knights'
 characters:
-    - name: 'Party 2 Human'
+    - name: 'Human Knight'
       race: 'Human'
+      row: Front
       items:
-      - 'Test Sword'
-    - name: 'Party 2 Orc'
-      race: 'Orc'
+      - 'Iron Sword'
+      - 'Iron Shield'
+      - 'Iron Breastplate'
+      - 'Ring of Minor Protection'
+    - name: 'Human Knight'
+      race: 'Human'
+      row: Front
       items:
-      - 'Test Sword'
+      - 'Iron Sword'
+      - 'Iron Shield'
+      - 'Iron Breastplate'
+      - 'Ring of Minor Protection'
+    - name: 'Human Cleric'
+      race: 'Human'
+      row: Middle
+      items:
+      - 'Holy Scepter'
+      - 'Iron Shield'
+      - 'Iron Breastplate'
+      - 'Ring of Minor Protection'
+    - name: 'Human Mage'
+      race: 'Human'
+      row: Back
+      items:
+      - 'Tomb of Magic Missile'
+    - name: 'Human Mage'
+      race: 'Human'
+      row: Back
+      items:
+      - 'Tomb of Magic Missile'

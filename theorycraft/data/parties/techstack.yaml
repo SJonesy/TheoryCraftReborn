@@ -1,0 +1,36 @@
+name: 'Tech Stack'
+characters:
+    - name: 'Tank'
+      race: 'Orc'
+      row: Front
+      items:
+      - 'Iron Dagger'
+      - 'Iron Shield'
+      - 'Iron Breastplate'
+      - 'Ring of Minor Protection'
+    - name: 'Healer'
+      race: 'Human'
+      row: Middle
+      items:
+      - 'Holy Scepter'
+    - name: 'Healer'
+      race: 'Human'
+      row: Middle
+      items:
+      - 'Holy Scepter'
+    - name: 'Nuker'
+      race: 'Human'
+      row: Back
+      items:
+      - 'Tomb of Magic Missile'
+    - name: 'Nuker'
+      race: 'Human'
+      row: Back
+      items:
+      - 'Tomb of Magic Missile'
+    - name: 'Nuker'
+      race: 'Human'
+      row: Back
+      items:
+      - 'Tomb of Magic Missile'
+

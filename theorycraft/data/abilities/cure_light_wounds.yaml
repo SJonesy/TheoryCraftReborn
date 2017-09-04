@@ -1,0 +1,9 @@
+name: 'Cure Light Wounds'
+type: 'DirectHealing'
+power: 1
+mana: 3
+effects: []
+beneficial: true
+partyTarget: false
+text: "@target briefly glows white and is healed for @healing from @actor's cure light wounds."
+textColor: 'white'

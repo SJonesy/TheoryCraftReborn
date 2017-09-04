@@ -1,8 +1,8 @@
 name: 'Slash'
 type: 'Melee'
-damage: 6
+power: 6
 effects: []
 beneficial: false
-partytarget: false
-text: '@actor swings his weapon and hits @target for @damage damage.'
-textColor: 'grey'
+partyTarget: false
+text: '@actor swings his weapon and slices @target for @damage damage.'
+textColor: 'darkgray'

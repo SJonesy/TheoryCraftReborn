@@ -1,14 +1,14 @@
 name: 'Orc'
 size: 'Medium'
-points: 5
+points: 15
 slots: [head, neck, torso, arms, primary, secondary, finger1, finger2, waist, legs, feet, hands]
 abilities: []
 stats:
-    strength: 16
+    strength: 15
     dexterity: 9
-    wisdom: 9
+    wisdom: 10
     charisma: 8
-    intelligence: 6
+    intelligence: 7
     constitution: 15
 resists:
     magic: 0.1

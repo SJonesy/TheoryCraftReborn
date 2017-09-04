@@ -1,0 +1,5 @@
+name: 'Leather Cuirass'
+points: 5
+slots: ['torso']
+ac: 3
+abilities: []

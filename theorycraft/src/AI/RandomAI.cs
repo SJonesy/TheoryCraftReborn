@@ -4,10 +4,10 @@ namespace theorycraft
 {
 	public class RandomAI : AI
 	{
-		public Character Actor { get; set; }
-		public Party FriendlyParty { get; set; }
-		public Party HostileParty { get; set; }
-		public Ability Ability { get; set; }
+		private Character Actor { get; set; }
+		private Party FriendlyParty { get; set; }
+		private Party HostileParty { get; set; }
+		private Ability Ability { get; set; }
 
 		public RandomAI () {
 		}
@@ -18,7 +18,9 @@ namespace theorycraft
 			this.FriendlyParty = friendlyParty;
 			this.HostileParty = hostileParty;
 
-			ChooseAbility();
+			Random rand = new Random();
+			int abilNum = rand.Next(this.Actor.Abilities.Count);
+			this.Ability = this.Actor.Abilities[abilNum];
 
 			if (this.Ability.PartyTarget) {
 				return new Action (this.Actor, this.HostileParty, this.Ability);
@@ -28,13 +30,8 @@ namespace theorycraft
 			}
 		}
 
-		public void ChooseAbility () {
-			Random rand = new Random();
-			int abilNum = rand.Next(this.Actor.Abilities.Count);
-			this.Ability = this.Actor.Abilities[abilNum];
-		}
 
-		public Character ChooseTarget ()
+		private Character ChooseTarget ()
 		{
 			Random rand = new Random();
 			Party targetParty = null;

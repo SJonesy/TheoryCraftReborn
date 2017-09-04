@@ -19,10 +19,13 @@ namespace theorycraft
 		public List<Ability> Abilities { get; set; }
 		public int MaxHitpoints { get; set; }
 		public int MaxMana { get; set; }
+		public int ManaRegen { get; set; }
 		public int MaxStamina { get; set; }
 		public Stat BaseStats { get; set; }
 		public Resist BaseResists { get; set; }
 		public AI AI { get; set; }
+		public Row Row { get; set; }
+		public int AC { get; set; }
 
 		// Change during combat
 		public int Hitpoints { get; set; }
@@ -67,6 +70,14 @@ namespace theorycraft
 			this.Abilities = new List<Ability>();
 			this.Inventory = new SortedDictionary<Slot, string>();
 			this.MaxHitpoints = (race.Stats.Constitution * 4) + 50;
+			this.MaxMana = (race.Stats.Intelligence * 2) + (race.Stats.Wisdom * 2) + 25;
+			this.Mana = MaxMana;
+			this.ManaRegen = (int)Math.Round((double)(race.Stats.Intelligence / 10));
+			this.Alive = true;
+			this.Hitpoints = this.MaxHitpoints;
+
+			//TODO: load AI choice
+			this.AI = new GeneralAI();
 
 			foreach (var a in race.Abilities) 
 			{
@@ -95,7 +106,7 @@ namespace theorycraft
 						this.Inventory.Add(gs, item);
 					}
 					PointCost += gear.Points;
-
+					AC += gear.AC;
 					foreach (var a in gear.Abilities) {
 						Ability abil = LoadAbility(a);
 						if (!this.Abilities.Contains(abil))

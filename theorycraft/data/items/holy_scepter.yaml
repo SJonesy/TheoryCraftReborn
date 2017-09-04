@@ -1,0 +1,4 @@
+name: 'Holy Scepter'
+points: 15
+slots: ['primary']
+abilities: ['smack', 'cure_light_wounds']

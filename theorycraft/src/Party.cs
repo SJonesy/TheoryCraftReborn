@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using YamlDotNet.Serialization;
 
@@ -16,12 +17,20 @@ namespace theorycraft
 		public Party ()
 		{
 		}
+
+		public int PointCost() {
+			int pointCost = 0;
+			foreach (Character character in CharacterList)
+				pointCost += character.PointCost;
+			return pointCost;
+		}
 	}
 
 	public struct PartyCharacter {
 		public string Name { get; set; }
 		public string Race { get; set; }
 		public List<string> Items { get; set; }
+		public Row Row { get; set; }
 	}
 }
 

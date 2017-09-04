@@ -1,11 +1,31 @@
-name: 'Test Party 1'
+name: 'Orc Raiders'
 characters:
-    - name: 'Party 1 Human'
-      race: 'Human'
-      items:
-      - 'Test Sword'
-    - name: 'Party 1 Orc'
+    - name: 'Orc Raider'
       race: 'Orc'
+      row: Front
       items:
-      - 'Test Sword'
-
+      - 'Iron Maul'
+      - 'Leather Cuirass'
+    - name: 'Orc Raider'
+      race: 'Orc'
+      row: Front
+      items:
+      - 'Iron Maul'
+      - 'Leather Cuirass'
+    - name: 'Orc Raider'
+      race: 'Orc'
+      row: Front
+      items:
+      - 'Iron Maul'
+      - 'Leather Cuirass'
+    - name: 'Orc Raider'
+      race: 'Orc'
+      row: Front
+      items:
+      - 'Iron Maul'
+      - 'Leather Cuirass'
+    - name: 'Orc Shaman'
+      race: 'Orc'
+      row: Middle
+      items:
+      - 'Holy Scepter'

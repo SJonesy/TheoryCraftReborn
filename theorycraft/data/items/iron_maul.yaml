@@ -1,0 +1,4 @@
+name: 'Iron Maul'
+points: 10
+slots: ['primary', 'secondary']
+abilities: ['crush']
