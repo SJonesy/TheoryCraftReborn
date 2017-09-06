@@ -11,12 +11,7 @@ characters:
       - 'Belt of Giant Strength'
       - 'Boots of Haste'
       - 'Amulet of Resistance'
-      - 'Ring of Minor Protection'
-    - name: 'Healer'
-      race: 'Orc'
-      row: Middle
-      items:
-      - 'Holy Scepter'
+      - 'Ring of Flame'
     - name: 'Healer'
       race: 'Orc'
       row: Middle

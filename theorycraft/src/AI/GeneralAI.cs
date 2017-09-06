@@ -23,6 +23,11 @@ namespace theorycraft
 			if (directHealingAbility != null && Actor.Mana >= directHealingAbility.Mana && injuredAlly != null)
 				return new Action(Actor, injuredAlly, directHealingAbility);
 
+			Ability groupDamageAbility = GetGroupDamageAbility();
+			int aliveEnemiesCount = hostileParty.CharacterList.FindAll (x => x.Alive).Count;
+			if (groupDamageAbility != null && Actor.Mana >= groupDamageAbility.Mana && aliveEnemiesCount > 1)
+				return new Action(Actor, hostileParty, groupDamageAbility);
+
 			Ability directDamageAbility = GetDirectDamageAbility();
 			if (directDamageAbility != null && Actor.Mana >= directDamageAbility.Mana)
 				return new Action(Actor, FindLowestHPTarget(), directDamageAbility);
@@ -57,6 +62,14 @@ namespace theorycraft
 
 		private List<Ability> GetDirectHealingAbilities() {
 			return Actor.Abilities.FindAll (x => x.Type == AbilityType.DirectHealing);
+		}
+
+		private Ability GetGroupDamageAbility() {
+			return Actor.Abilities.Find (x => x.Type == AbilityType.GroupDamage);
+		}
+
+		private List<Ability> GetGroupDamageAbilities() {
+			return Actor.Abilities.FindAll (x => x.Type == AbilityType.GroupDamage);
 		}
 
 		private Character FindLowestHPMeleeTarget() {

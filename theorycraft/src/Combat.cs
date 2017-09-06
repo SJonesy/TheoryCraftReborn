@@ -66,6 +66,9 @@ namespace theorycraft
 					if (action == null)
 						continue;
 
+					if (action.Ability.Mana > 0)
+						action.Actor.Mana -= action.Ability.Mana;
+
 					switch (action.Ability.Type) {
 						case AbilityType.Melee:
 							int minDamage = combatant.Stats[Stat.Strength]; 
@@ -81,6 +84,14 @@ namespace theorycraft
 							int minHeal = action.Ability.Power;
 							int maxHeal = combatant.Stats[Stat.Wisdom] + action.Ability.Power;
 							DoSingleHealing (action, minHeal, maxHeal, rand);
+							break;
+						case AbilityType.GroupDamage:
+							foreach (Character target in hostileParty.CharacterList) {
+								Action targetedAction = new Action (action.Actor, target, action.Ability);
+								minDamage = (combatant.Stats [Stat.Intelligence] / 5);
+								maxDamage = combatant.Stats [Stat.Intelligence] + action.Ability.Power;
+								DoSingleDamage (targetedAction, minDamage, maxDamage, rand);
+							}
 							break;
 					}
 
@@ -135,8 +146,6 @@ namespace theorycraft
 			int damage = rand.Next(minDamage, maxDamage);
 			if (action.Ability.Type == AbilityType.Melee)
 				damage -= action.TargetCharacter.AC;
-			if (action.Ability.Mana > 0)
-				action.Actor.Mana -= action.Ability.Mana;
 			if (action.Ability.Type == AbilityType.DirectDamage) {
 				float resist;
 				action.TargetCharacter.Resists.TryGetValue(action.Ability.ResistType, out resist);
@@ -152,8 +161,9 @@ namespace theorycraft
 				.Replace("@actor", action.Actor.Name)
 				.Replace("@target", action.TargetCharacter.Name)
 				.Replace("@damage", damage.ToString());
-			Console.WriteLine(output);
+			Console.Write(output);
 			Console.ResetColor();
+			Console.Write("\n");
 			if (action.TargetCharacter.Hitpoints <= 0) {
 				action.TargetCharacter.Alive = false;
 				Console.ForegroundColor = ConsoleColor.DarkRed;
