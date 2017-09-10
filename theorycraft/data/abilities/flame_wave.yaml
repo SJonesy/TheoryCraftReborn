@@ -1,0 +1,11 @@
+name: 'Flame Wave'
+type: 'GroupDamage'
+power: 7
+mana: 24
+effects: []
+beneficial: false
+partyTarget: true
+text: "@actor's flame wave washes over @target dealing @damage damage."
+textColor: 'red'
+backgroundColor: 'darkyellow'
+resistType: 'fire'
