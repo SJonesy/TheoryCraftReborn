@@ -2,23 +2,6 @@ using System;
 
 namespace theorycraft
 {
-	public enum Slot
-	{
-		Head,
-		Neck,
-		Torso,
-		Arms,
-		Hands,
-		Primary,
-		Secondary,
-		Finger1,
-		Finger2,
-		Finger,
-		Waist,
-		Legs,
-		Feet
-	}
-
 	public enum AbilityType {
 		Melee,
 		DirectHealing,
@@ -74,5 +57,13 @@ namespace theorycraft
 		Intelligence,
 		Constitution
 	}
+
+    public enum Slot
+    {
+        Held,
+        Armor,
+        Accessory,
+        Tome
+    }
 }
 

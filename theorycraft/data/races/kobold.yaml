@@ -1,7 +1,6 @@
 name: 'Kobold'
 size: 'Small'
-points: 5
-slots: ['head', 'neck', 'torso', 'arms', 'hands', 'primary', 'secondary', 'finger', 'waist', 'legs', 'feet']
+points: 35
 abilities: []
 stats:
     strength: 6

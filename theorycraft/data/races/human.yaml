@@ -1,7 +1,6 @@
 name: 'Human'
 size: 'Medium'
-points: 10
-slots: ['head', 'neck', 'torso', 'arms', 'hands', 'primary', 'secondary', 'finger', 'waist', 'legs', 'feet']
+points: 50
 abilities: []
 stats:
     strength: 10

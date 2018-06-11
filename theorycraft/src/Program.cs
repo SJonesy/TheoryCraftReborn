@@ -26,7 +26,7 @@ namespace theorycraft
 					.WithNamingConvention(new CamelCaseNamingConvention())
 					.Build();
 				var party = deserializer.Deserialize<Party>(yaml);
-				party.Points = 300;
+				party.Points = 500;
 				party.CharacterList = new List<Character>();
 				parties.Add(party);
 			}

@@ -14,8 +14,6 @@ namespace theorycraft
 		public int PointCost { get; set; }
 		public int PartyId { get; set; }
 		public Sizes Size { get; set;}
-		public List<Slot> Slots { get; set; }
-		public SortedDictionary<Slot, string> Inventory { get; set; }
 		public List<Ability> Abilities { get; set; }
 		public int MaxHitpoints { get; set; }
 		public int MaxMana { get; set; }
@@ -60,13 +58,11 @@ namespace theorycraft
 			var race = deserializer.Deserialize<Race>(yaml);
 
 			this.Race = race.Name;
-			this.Slots = race.Slots;
 			this.Size = race.Size;
 			this.BaseStats = race.Stats;
 			this.BaseResists = race.Resists;
 			this.PointCost += race.Points;
 			this.Abilities = new List<Ability>();
-			this.Inventory = new SortedDictionary<Slot, string>();
 			this.Alive = true;
 			this.Row = row;
 
@@ -77,47 +73,6 @@ namespace theorycraft
 			{
 				Ability abil = LoadAbility(a);
 				this.Abilities.Add(abil);
-			}
-
-			foreach (var item in items) 
-			{
-				yaml = File.ReadAllText(itemPath + item + ".yaml");
-				deserializer = new DeserializerBuilder()
-					.WithNamingConvention(new CamelCaseNamingConvention())
-					.Build();
-				var gear = deserializer.Deserialize<Item>(yaml);
-
-				if (gear.Resists != null) {
-					foreach (KeyValuePair<Resist, float> resist in gear.Resists) {
-						this.BaseResists[resist.Key] += resist.Value;
-					}
-				}
-				if (gear.Stats != null) {
-					foreach (KeyValuePair<Stat, int> stat in gear.Stats) {
-						this.BaseStats[stat.Key] += stat.Value;
-					}
-				}
-
-				Boolean availableSlot = true;
-
-				foreach (Slot s in gear.Slots) {
-					if (!this.Slots.Contains(s)) {
-						availableSlot = false;
-					}
-				}
-				if (availableSlot) {
-					foreach (var gs in gear.Slots) {
-						this.Slots.Remove(gs);
-						this.Inventory.Add(gs, item);
-					}
-					PointCost += gear.Points;
-					AC += gear.AC;
-					foreach (var a in gear.Abilities) {
-						Ability abil = LoadAbility(a);
-						if (!this.Abilities.Contains(abil))
-							this.Abilities.Add(abil);
-					}
-				}
 			}
 
 			this.Resists = this.BaseResists;

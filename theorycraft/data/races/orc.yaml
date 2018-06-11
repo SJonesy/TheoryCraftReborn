@@ -1,7 +1,6 @@
 name: 'Orc'
 size: 'Medium'
-points: 14
-slots: [head, neck, torso, arms, primary, secondary, finger, waist, legs, feet, hands]
+points: 54
 abilities: []
 stats:
     strength: 15

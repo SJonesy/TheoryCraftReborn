@@ -29,7 +29,11 @@ namespace theorycraft
 	public struct PartyCharacter {
 		public string Name { get; set; }
 		public string Race { get; set; }
-		public List<string> Items { get; set; }
+        public Item Weapon { get; set; }
+        public Item Armor { get; set; }
+        public Item Accessory { get; set; }
+
+
 		public Row Row { get; set; }
 	}
 }

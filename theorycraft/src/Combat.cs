@@ -106,8 +106,8 @@ namespace theorycraft
 						foreach (var party in parties) {
 							if (deadPartyList.Contains(party))
 								continue;
-							Console.BackgroundColor = ConsoleColor.DarkGreen;
 							Console.ForegroundColor = ConsoleColor.Green;
+							Console.BackgroundColor = ConsoleColor.White;
 							Console.Write("The winner is " + party.Name);
 							Console.ResetColor();
 							Console.Write("\n");

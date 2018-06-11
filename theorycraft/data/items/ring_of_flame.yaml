@@ -1,7 +1,7 @@
 name: 'Ring of Flame'
 points: 25
 slots: ['finger']
-abilities: ['Flame Wave']
+abilities: ['flame_wave']
 resists:
     magic: 0.0
     fire: 0.3

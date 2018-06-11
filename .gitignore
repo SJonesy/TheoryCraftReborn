@@ -2,3 +2,4 @@ theorycraft/bin/*
 *.userprefs
 **/packages/*
 *.nupkg
+theorycraft/obj/*
