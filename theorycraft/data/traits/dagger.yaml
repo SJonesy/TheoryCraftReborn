@@ -1,6 +1,7 @@
 name: 'Pierce'
 type: 'Melee'
 power: 2
+pointCost: 2
 effects: []
 beneficial: false
 partyTarget: false

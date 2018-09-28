@@ -43,18 +43,17 @@
     <Compile Include="src\Combat.cs" />
     <Compile Include="src\Dice.cs" />
     <Compile Include="src\Enums.cs" />
-    <Compile Include="src\Item.cs" />
     <Compile Include="src\Party.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="src\Race.cs" />
     <Compile Include="src\AI\AI.cs" />
     <Compile Include="src\AI\RandomAI.cs" />
     <Compile Include="src\AI\GeneralAI.cs" />
-    <Compile Include="src\Abilities\Ability.cs" />
+    <Compile Include="src\Traits\Trait.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="data\abilities\slash.yaml">
+    <None Include="data\traits\slash.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\races\orc.yaml">
@@ -66,73 +65,31 @@
     <None Include="data\parties\testparty2.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\items\test_sword.yaml">
+    <None Include="data\traits\mace.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\items\iron_sword.yaml">
+    <None Include="data\traits\spell_magic_missile.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\items\leather_cuirass.yaml">
+    <None Include="data\traits\smack.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\items\iron_breastplate.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\items\ring_of_minor_protection.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\items\iron_shield.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\items\iron_maul.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\abilities\crush.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\items\tomb_of_magic_missile.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\abilities\magic_missile.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\items\holy_scepter.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\abilities\smack.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\abilities\cure_light_wounds.yaml">
+    <None Include="data\traits\spell_cure_light_wounds.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\parties\techstack.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\items\iron_dagger.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\abilities\dagger.yaml">
+    <None Include="data\traits\dagger.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\parties\nukers.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\abilities\cure_serious_wounds.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\items\amulet_of_resistance.yaml">
+    <None Include="data\traits\spell_cure_serious_wounds.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\parties\juggernaut.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\items\belt_of_giant_strength.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\items\boots_of_haste.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\items\iron_legplates.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\races\kobold.yaml">
@@ -141,22 +98,21 @@
     <None Include="data\parties\horde.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="data\abilities\flame_wave.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="data\items\ring_of_flame.yaml">
+    <None Include="data\traits\spell_flame_wave.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
     <None Include="data\races\human.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="data\traits\plate_armor.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="data\" />
     <Folder Include="data\parties\" />
-    <Folder Include="data\items\" />
     <Folder Include="src\" />
-    <Folder Include="src\Abilities\" />
+    <Folder Include="src\Traits\" />
   </ItemGroup>
 </Project>

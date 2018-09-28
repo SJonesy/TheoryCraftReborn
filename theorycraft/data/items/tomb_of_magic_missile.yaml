@@ -1,4 +1,0 @@
-name: 'Tomb of Magic Missile'
-points: 12
-slots: ['primary', 'secondary']
-abilities: ['magic_missile']

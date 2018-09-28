@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 
 namespace theorycraft
 {
-	public enum AbilityType {
+	public enum TraitType {
 		Melee,
 		DirectHealing,
 		DirectDamage,
@@ -11,7 +11,8 @@ namespace theorycraft
 		GroupBuff,
 		GroupHealing,
 		GroupDamage,
-		Custom
+		Custom,
+        StatChange
 	}
 
 	public enum Sizes
@@ -55,7 +56,8 @@ namespace theorycraft
 		Wisdom,
 		Charisma,
 		Intelligence,
-		Constitution
+		Constitution,
+        AC
 	}
 
     public enum Slot

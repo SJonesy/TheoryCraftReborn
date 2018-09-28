@@ -3,34 +3,22 @@ characters:
     - name: 'Human Knight'
       race: 'Human'
       row: Front
-      items:
-      - 'Iron Sword'
-      - 'Iron Shield'
-      - 'Iron Breastplate'
-      - 'Ring of Minor Protection'
-    - name: 'Human Knight'
-      race: 'Human'
-      row: Front
-      items:
-      - 'Iron Sword'
-      - 'Iron Shield'
-      - 'Iron Breastplate'
-      - 'Ring of Minor Protection'
+      traits:
+      - 'mace'
+      - 'plate_armor'
     - name: 'Human Cleric'
       race: 'Human'
       row: Middle
-      items:
-      - 'Holy Scepter'
-      - 'Iron Shield'
-      - 'Iron Breastplate'
-      - 'Ring of Minor Protection'
+      traits:
+      - 'spell_cure_serious_wounds'
+      - 'plate_armor'
     - name: 'Human Mage'
       race: 'Human'
       row: Back
-      items:
-      - 'Tomb of Magic Missile'
-    - name: 'Human Mage'
-      race: 'Human'
+      traits:
+      - 'spell_flame_wave'
+    - name: 'Kobold Dagger'
+      race: 'Kobold'
       row: Back
-      items:
-      - 'Tomb of Magic Missile'
+      traits:
+      - 'dagger'

@@ -1,7 +1,7 @@
 name: 'Orc'
 size: 'Medium'
 points: 54
-abilities: []
+traits: []
 stats:
     strength: 15
     dexterity: 9

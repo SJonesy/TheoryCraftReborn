@@ -5,36 +5,32 @@ using YamlDotNet.Serialization;
 
 namespace theorycraft
 {
-	public class Party
-	{
-		public string Name { get; set; }
-		public int Points { get; set; }
-		public List<Character> CharacterList { get; set; }
+    public class Party
+    {
+        public string Name { get; set; }
+        public int Points { get; set; }
+        public List<Character> CharacterList { get; set; }
 
-		[YamlMember(Alias = "characters", ApplyNamingConventions = false)]
-		public List<PartyCharacter> PartyCharacters { get; set; }
+        [YamlMember(Alias = "characters", ApplyNamingConventions = false)]
+        public List<PartyCharacter> PartyCharacters { get; set; }
 
-		public Party ()
-		{
-		}
+        public Party ()
+        {
+        }
 
-		public int PointCost() {
-			int pointCost = 0;
-			foreach (Character character in CharacterList)
-				pointCost += character.PointCost;
-			return pointCost;
-		}
-	}
+        public int PointCost() {
+            int pointCost = 0;
+            foreach (Character character in CharacterList)
+                pointCost += character.PointCost;
+            return pointCost;
+        }
+    }
 
-	public struct PartyCharacter {
-		public string Name { get; set; }
-		public string Race { get; set; }
-        public Item Weapon { get; set; }
-        public Item Armor { get; set; }
-        public Item Accessory { get; set; }
-
-
-		public Row Row { get; set; }
-	}
+    public struct PartyCharacter {
+        public string Name { get; set; }
+        public string Race { get; set; }
+        public List<String> Traits { get; set; }
+        public Row Row { get; set; }
+    }
 }
 

@@ -1,6 +1,7 @@
 name: 'Slash'
 type: 'Melee'
 power: 6
+pointCost: 6
 effects: []
 beneficial: false
 partyTarget: false

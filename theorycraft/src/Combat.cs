@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace theorycraft
@@ -60,36 +60,36 @@ namespace theorycraft
 							hostileParty = parties[i];
 					}
 
-					// Do an ability
+					// Do an action
 					Action action = combatant.AI.ChooseAction (combatant, friendlyParty, hostileParty);
 
 					if (action == null)
 						continue;
 
-					if (action.Ability.Mana > 0)
-						action.Actor.Mana -= action.Ability.Mana;
+					if (action.Trait.Mana > 0)
+						action.Actor.Mana -= action.Trait.Mana;
 
-					switch (action.Ability.Type) {
-						case AbilityType.Melee:
+					switch (action.Trait.Type) {
+						case TraitType.Melee:
 							int minDamage = combatant.Stats[Stat.Strength]; 
-							int maxDamage = combatant.Stats[Stat.Strength] + action.Ability.Power;
+							int maxDamage = combatant.Stats[Stat.Strength] + action.Trait.Power;
 							DoSingleDamage (action, minDamage, maxDamage, rand);
 							break;
-						case AbilityType.DirectDamage:
-							minDamage = action.Ability.Power;
-							maxDamage = combatant.Stats[Stat.Intelligence] + action.Ability.Power;
+						case TraitType.DirectDamage:
+							minDamage = action.Trait.Power;
+							maxDamage = combatant.Stats[Stat.Intelligence] + action.Trait.Power;
 							DoSingleDamage (action, minDamage, maxDamage, rand);
 							break;
-						case AbilityType.DirectHealing:
-							int minHeal = action.Ability.Power;
-							int maxHeal = combatant.Stats[Stat.Wisdom] + action.Ability.Power;
+						case TraitType.DirectHealing:
+							int minHeal = action.Trait.Power;
+							int maxHeal = combatant.Stats[Stat.Wisdom] + action.Trait.Power;
 							DoSingleHealing (action, minHeal, maxHeal, rand);
 							break;
-						case AbilityType.GroupDamage:
+						case TraitType.GroupDamage:
 							foreach (Character target in hostileParty.CharacterList) {
-								Action targetedAction = new Action (action.Actor, target, action.Ability);
+								Action targetedAction = new Action (action.Actor, target, action.Trait);
 								minDamage = (combatant.Stats [Stat.Intelligence] / 5);
-								maxDamage = combatant.Stats [Stat.Intelligence] + action.Ability.Power;
+								maxDamage = combatant.Stats [Stat.Intelligence] + action.Trait.Power;
 								DoSingleDamage (targetedAction, minDamage, maxDamage, rand);
 							}
 							break;
@@ -144,20 +144,20 @@ namespace theorycraft
 
 		private void DoSingleDamage(Action action, int minDamage, int maxDamage, Random rand) {
 			int damage = rand.Next(minDamage, maxDamage);
-			if (action.Ability.Type == AbilityType.Melee)
+			if (action.Trait.Type == TraitType.Melee)
 				damage -= action.TargetCharacter.AC;
-			if (action.Ability.Type == AbilityType.DirectDamage) {
+			if (action.Trait.Type == TraitType.DirectDamage) {
 				float resist;
-				action.TargetCharacter.Resists.TryGetValue(action.Ability.ResistType, out resist);
+				action.TargetCharacter.Resists.TryGetValue(action.Trait.ResistType, out resist);
 				damage -= (int)(resist * damage);
 			}
 			if (damage <= 0)
 				damage = 1;
 			action.TargetCharacter.Hitpoints -= damage;
-			Console.ForegroundColor = GetColor(action.Ability.TextColor);
-			if (action.Ability.BackgroundColor != null)
-				Console.BackgroundColor = GetColor(action.Ability.BackgroundColor);
-			string output = action.Ability.Text
+			Console.ForegroundColor = GetColor(action.Trait.TextColor);
+			if (action.Trait.BackgroundColor != null)
+				Console.BackgroundColor = GetColor(action.Trait.BackgroundColor);
+			string output = action.Trait.Text
 				.Replace("@actor", action.Actor.Name)
 				.Replace("@target", action.TargetCharacter.Name)
 				.Replace("@damage", damage.ToString());
@@ -174,13 +174,13 @@ namespace theorycraft
 
 		private void DoSingleHealing(Action action, int minHealing, int maxHealing, Random rand) {
 			int healing = rand.Next(minHealing, maxHealing);
-			if (action.Ability.Mana > 0)
-				action.Actor.Mana -= action.Ability.Mana;
+			if (action.Trait.Mana > 0)
+				action.Actor.Mana -= action.Trait.Mana;
 			action.TargetCharacter.Hitpoints += healing;
-			Console.ForegroundColor = GetColor(action.Ability.TextColor);
-			if (action.Ability.BackgroundColor != null)
-				Console.BackgroundColor = GetColor(action.Ability.BackgroundColor);
-			string output = action.Ability.Text
+			Console.ForegroundColor = GetColor(action.Trait.TextColor);
+			if (action.Trait.BackgroundColor != null)
+				Console.BackgroundColor = GetColor(action.Trait.BackgroundColor);
+			string output = action.Trait.Text
 				.Replace("@actor", action.Actor.Name)
 				.Replace("@target", action.TargetCharacter.Name)
 				.Replace("@healing", healing.ToString());

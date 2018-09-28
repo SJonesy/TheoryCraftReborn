@@ -37,7 +37,7 @@ namespace theorycraft
 				Console.WriteLine (party.Name);
 				foreach (var partycharacter in party.PartyCharacters) 
 				{
-					Character character = new Character(partycharacter.Name, partycharacter.Race, partycharacter.Items, partycharacter.Row);
+                    Character character = new Character(partycharacter.Name, partycharacter.Race, partycharacter.Row, partycharacter.Traits);
 					character.PartyId = i;
 					if (character.PointCost < party.Points) 
 					{

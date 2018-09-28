@@ -1,6 +1,7 @@
-name: 'Cure Serious Wounds'
+name: 'Spell: Cure Serious Wounds'
 type: 'DirectHealing'
 power: 20
+pointCost: 15
 mana: 15
 effects: []
 beneficial: true

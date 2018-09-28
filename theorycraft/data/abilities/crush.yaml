@@ -1,8 +1,0 @@
-name: 'Crush'
-type: 'Melee'
-power: 10
-effects: []
-beneficial: false
-partyTarget: false
-text: '@actor swings his weapon and crushes @target for @damage damage.'
-textColor: 'darkgray'

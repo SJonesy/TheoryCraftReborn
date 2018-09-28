@@ -3,3 +3,4 @@ theorycraft/bin/*
 **/packages/*
 *.nupkg
 theorycraft/obj/*
+*.csproj.user

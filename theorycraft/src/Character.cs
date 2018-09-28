@@ -14,7 +14,7 @@ namespace theorycraft
 		public int PointCost { get; set; }
 		public int PartyId { get; set; }
 		public Sizes Size { get; set;}
-		public List<Ability> Abilities { get; set; }
+		public List<Trait> Traits { get; set; }
 		public int MaxHitpoints { get; set; }
 		public int MaxMana { get; set; }
 		public int ManaRegen { get; set; }
@@ -37,18 +37,13 @@ namespace theorycraft
 
 		public Character () { }
 
-		public Character (string name, string raceName, List<string> items, Row row)
+		public Character (string name, string raceName, Row row, List<String> traits)
 		{
 			var racePath = "data/races/";
-			var itemPath = "data/items/";
 
 			this.Name = name;
 
 			raceName = raceName.ToLower();
-			for (var i = 0; i < items.Count; i++) 
-			{
-				items[i] = items[i].ToLower().Replace (' ', '_');
-			}
 
 			var yaml = File.ReadAllText(racePath + raceName + ".yaml");
 			var deserializer = new DeserializerBuilder()
@@ -62,18 +57,24 @@ namespace theorycraft
 			this.BaseStats = race.Stats;
 			this.BaseResists = race.Resists;
 			this.PointCost += race.Points;
-			this.Abilities = new List<Ability>();
+			this.Traits = new List<Trait>();
 			this.Alive = true;
 			this.Row = row;
 
 			//TODO: load AI choice
 			this.AI = new GeneralAI();
 
-			foreach (var a in race.Abilities) 
+			foreach (var t in race.Traits) 
 			{
-				Ability abil = LoadAbility(a);
-				this.Abilities.Add(abil);
+				Trait trait = LoadTrait(t);
+				this.Traits.Add(trait);
 			}
+
+            foreach (var t in traits) {
+                Trait trait = LoadTrait(t);
+                this.Traits.Add(trait);
+                this.PointCost += trait.PointCost;
+            }
 
 			this.Resists = this.BaseResists;
 			this.Stats = this.BaseStats;
@@ -83,34 +84,31 @@ namespace theorycraft
 			this.Mana = MaxMana;
 			this.ManaRegen = (int)Math.Round((double)(this.Stats[Stat.Wisdom] / 10));
 			this.AC += this.Stats[Stat.Dexterity] / 4;
+
+            foreach (var t in this.Traits) {
+                if (t.Stat == Stat.AC)
+                    this.AC += t.Power;
+            }
 		}
 
-		private Ability LoadAbility(string abil) {
-			var yaml = File.ReadAllText("data/abilities/" + abil + ".yaml");
+        private Trait LoadTrait(String t) {
+            var yaml = File.ReadAllText("data/traits/" + t + ".yaml");
 			var deserializer = new DeserializerBuilder()
 				.WithNamingConvention(new CamelCaseNamingConvention())
 				.Build();
 
-			var ability = deserializer.Deserialize<Ability>(yaml);
+			var trait = deserializer.Deserialize<Trait>(yaml);
 
-			return ability;
+			return trait;
 		}
 
 		public string DisplayCharacter() {
 			string output;
 			output =  String.Format("Name: {0} \t Race: {1} \t Size {2} \t Point Cost: {3}\n", this.Name, this.Race, this.Size, this.PointCost);
-			output += String.Format("Abilities: {0}\n", string.Join(", ", this.Abilities));
 			output += String.Format("HP:{0}/{0} MP:{1}/{1} SP:{2}/{2}\n", this.MaxHitpoints, this.MaxMana, this.MaxStamina);
 			output += String.Format("Stats: {0}STR {1}CON {2}CHA {3}WIS {4}DEX {5}INT\n", this.Stats[Stat.Strength], this.Stats[Stat.Constitution], this.Stats[Stat.Charisma], this.Stats[Stat.Wisdom], this.Stats[Stat.Dexterity], this.Stats[Stat.Intelligence]);
 			output += String.Format("Resists: {0}MAG {1}COL {2}FIR {3}HOL {4}NEC {5}POI {6}PSI\n", this.Resists[Resist.Magic], this.Resists[Resist.Cold], this.Resists[Resist.Fire], this.Resists[Resist.Holy], this.Resists[Resist.Necrotic], this.Resists[Resist.Poison], this.Resists[Resist.Psionic]);
-			output += String.Format("Equipment:\n");
-
-			foreach (var kvp in this.Inventory) {
-				output += String.Format("{0}\t{1}\n", kvp.Key, kvp.Value);
-			}
-			foreach (var slot in this.Slots) {
-				output += String.Format ("{0}\t<unused>\n", slot);
-			}
+			output += String.Format("Traits: {0}\n", string.Join(", ", this.Traits));
 
 			return output;
 		}

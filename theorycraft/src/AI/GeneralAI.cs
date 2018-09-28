@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -18,58 +18,58 @@ namespace theorycraft
 			this.FriendlyParty = friendlyParty;
 			this.HostileParty = hostileParty;
 
-			Ability directHealingAbility = GetDirectHealingAbility();
+			Trait directHealingTrait = GetDirectHealingTrait();
 			Character injuredAlly = FindLowestHPInjuredAlly();
-			if (directHealingAbility != null && Actor.Mana >= directHealingAbility.Mana && injuredAlly != null)
-				return new Action(Actor, injuredAlly, directHealingAbility);
+			if (directHealingTrait != null && Actor.Mana >= directHealingTrait.Mana && injuredAlly != null)
+				return new Action(Actor, injuredAlly, directHealingTrait);
 
-			Ability groupDamageAbility = GetGroupDamageAbility();
+			Trait groupDamageTrait = GetGroupDamageTrait();
 			int aliveEnemiesCount = hostileParty.CharacterList.FindAll (x => x.Alive).Count;
-			if (groupDamageAbility != null && Actor.Mana >= groupDamageAbility.Mana && aliveEnemiesCount > 1)
-				return new Action(Actor, hostileParty, groupDamageAbility);
+			if (groupDamageTrait != null && Actor.Mana >= groupDamageTrait.Mana && aliveEnemiesCount > 1)
+				return new Action(Actor, hostileParty, groupDamageTrait);
 
-			Ability directDamageAbility = GetDirectDamageAbility();
-			if (directDamageAbility != null && Actor.Mana >= directDamageAbility.Mana)
-				return new Action(Actor, FindLowestHPTarget(), directDamageAbility);
+			Trait directDamageTrait = GetDirectDamageTrait();
+			if (directDamageTrait != null && Actor.Mana >= directDamageTrait.Mana)
+				return new Action(Actor, FindLowestHPTarget(), directDamageTrait);
 
-			Ability meleeAbility = GetMeleeAbility();
+			Trait meleeTrait = GetMeleeTrait();
 			Character meleeTarget = FindLowestHPMeleeTarget();
-			if (meleeAbility != null && meleeTarget != null)
-				return new Action(Actor, meleeTarget, meleeAbility);
+			if (meleeTrait != null && meleeTarget != null)
+				return new Action(Actor, meleeTarget, meleeTrait);
 
 			return null;
 		}
 
-		private Ability GetMeleeAbility() {
-			return Actor.Abilities.Find (x => x.Type == AbilityType.Melee);
+		private Trait GetMeleeTrait() {
+			return Actor.Traits.Find (x => x.Type == TraitType.Melee);
 		}
 
-		private List<Ability> GetAllMeleeAbilities() {
-			return Actor.Abilities.FindAll (x => x.Type == AbilityType.Melee);
+        private List<Trait> GetAllMeleeActions() {
+			return Actor.Traits.FindAll (x => x.Type == TraitType.Melee);
 		}
 
-		private Ability GetDirectDamageAbility() {
-			return Actor.Abilities.Find (x => x.Type == AbilityType.DirectDamage);
+		private Trait GetDirectDamageTrait() {
+			return Actor.Traits.Find (x => x.Type == TraitType.DirectDamage);
 		}
 
-		private List<Ability> GetDirectDamageAbilities() {
-			return Actor.Abilities.FindAll (x => x.Type == AbilityType.DirectDamage);
+        private List<Trait> GetDirectDamageActions() {
+			return Actor.Traits.FindAll (x => x.Type == TraitType.DirectDamage);
 		}
 
-		private Ability GetDirectHealingAbility() {
-			return Actor.Abilities.Find (x => x.Type == AbilityType.DirectHealing);
+		private Trait GetDirectHealingTrait() {
+			return Actor.Traits.Find (x => x.Type == TraitType.DirectHealing);
 		}
 
-		private List<Ability> GetDirectHealingAbilities() {
-			return Actor.Abilities.FindAll (x => x.Type == AbilityType.DirectHealing);
+        private List<Trait> GetDirectHealingActions() {
+			return Actor.Traits.FindAll (x => x.Type == TraitType.DirectHealing);
 		}
 
-		private Ability GetGroupDamageAbility() {
-			return Actor.Abilities.Find (x => x.Type == AbilityType.GroupDamage);
+		private Trait GetGroupDamageTrait() {
+			return Actor.Traits.Find (x => x.Type == TraitType.GroupDamage);
 		}
 
-		private List<Ability> GetGroupDamageAbilities() {
-			return Actor.Abilities.FindAll (x => x.Type == AbilityType.GroupDamage);
+        private List<Trait> GetGroupDamageActions() {
+			return Actor.Traits.FindAll (x => x.Type == TraitType.GroupDamage);
 		}
 
 		private Character FindLowestHPMeleeTarget() {

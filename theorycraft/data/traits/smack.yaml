@@ -1,6 +1,7 @@
 name: 'Smack'
 type: 'Melee'
 power: 5
+pointCost: 5
 effects: []
 beneficial: false
 partyTarget: false

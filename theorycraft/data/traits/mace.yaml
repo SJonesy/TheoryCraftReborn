@@ -1,0 +1,9 @@
+name: 'Mace'
+type: 'Melee'
+pointCost: 10
+power: 10
+effects: []
+beneficial: false
+partyTarget: false
+text: '@actor swings his mace and crushes @target for @damage damage.'
+textColor: 'darkgray'

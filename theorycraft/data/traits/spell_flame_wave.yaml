@@ -1,6 +1,7 @@
-name: 'Flame Wave'
+name: 'Spell: Flame Wave'
 type: 'GroupDamage'
 power: 7
+pointCost: 21
 mana: 24
 effects: []
 beneficial: false

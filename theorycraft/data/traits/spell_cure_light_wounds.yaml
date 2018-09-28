@@ -1,6 +1,7 @@
-name: 'Cure Light Wounds'
+name: 'Spell: Cure Light Wounds'
 type: 'DirectHealing'
 power: 1
+pointCost: 5
 mana: 3
 effects: []
 beneficial: true

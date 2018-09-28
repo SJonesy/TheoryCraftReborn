@@ -1,7 +1,7 @@
 name: 'Human'
 size: 'Medium'
 points: 50
-abilities: []
+traits: []
 stats:
     strength: 10
     dexterity: 10

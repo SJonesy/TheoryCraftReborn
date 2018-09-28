@@ -1,14 +1,16 @@
-using System;
+﻿using System;
 using YamlDotNet.Serialization;
 
 namespace theorycraft
 {
-	public class Ability
+	public class Trait
 	{
 		public string Name { get; set; }
 		public int Cooldown { get; set; }
 		public int Mana { get; set; }
-		public AbilityType Type { get; set; }
+        public int PointCost { get; set; }
+		public TraitType Type { get; set; }
+        public Stat Stat { get; set; }
 		public int Power { get; set; }
 		public Effect[] Effects { get; set; }
 		public string Text { get; set; }

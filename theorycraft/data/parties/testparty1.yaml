@@ -3,29 +3,25 @@ characters:
     - name: 'Orc Raider'
       race: 'Orc'
       row: Front
-      items:
-      - 'Iron Maul'
-      - 'Leather Cuirass'
+      traits:
+      - 'mace'
     - name: 'Orc Raider'
       race: 'Orc'
       row: Front
-      items:
-      - 'Iron Maul'
-      - 'Leather Cuirass'
+      traits:
+      - 'mace'
     - name: 'Orc Raider'
       race: 'Orc'
       row: Front
-      items:
-      - 'Iron Maul'
-      - 'Leather Cuirass'
+      traits:
+      - 'mace'
     - name: 'Orc Raider'
       race: 'Orc'
       row: Front
-      items:
-      - 'Iron Maul'
-      - 'Leather Cuirass'
-    - name: 'Orc Shaman'
-      race: 'Orc'
-      row: Middle
-      items:
-      - 'Holy Scepter'
+      traits:
+      - 'mace'
+    - name: 'Kobold Rat'
+      race: 'Kobold'
+      row: Front
+      traits:
+      - 'dagger'
