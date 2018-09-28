@@ -60,6 +60,7 @@ namespace theorycraft
 			this.Traits = new List<Trait>();
 			this.Alive = true;
 			this.Row = row;
+            this.ManaRegen = 0;
 
 			//TODO: load AI choice
 			this.AI = new GeneralAI();
@@ -78,23 +79,25 @@ namespace theorycraft
 
 			this.Resists = this.BaseResists;
 			this.Stats = this.BaseStats;
+
+            foreach (var t in this.Traits)
+			{
+				if (t.Type != TraitType.StatChange)
+					continue;
+
+				if (t.Stat == Stat.AC)
+					this.AC += t.Power;
+
+				if (this.Stats.ContainsKey(t.Stat))
+					this.Stats[t.Stat] += t.Power;
+			}
+
 			this.MaxHitpoints = (this.Stats[Stat.Constitution] * 4) + 50;
 			this.Hitpoints = this.MaxHitpoints;
 			this.MaxMana = (this.Stats[Stat.Intelligence] * 2) + (this.Stats[Stat.Wisdom] * 2) + 25;
 			this.Mana = MaxMana;
-			this.ManaRegen = (int)Math.Round((double)(this.Stats[Stat.Wisdom] / 10));
+			this.ManaRegen += (int)Math.Round((double)(this.Stats[Stat.Wisdom] / 10));
 			this.AC += this.Stats[Stat.Dexterity] / 4;
-
-            foreach (var t in this.Traits) {
-                if (t.Type != TraitType.StatChange)
-                    continue;
-
-                if (t.Stat == Stat.AC)
-                    this.AC += t.Power;
-
-                if (this.Stats.ContainsKey(t.Stat))
-                    this.Stats[t.Stat] += t.Power;
-            }
 		}
 
         private Trait LoadTrait(String t) {

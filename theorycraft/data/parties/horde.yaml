@@ -18,24 +18,23 @@ characters:
       race: 'Kobold'
       row: Back
       traits:
+      - 'wise'
       - 'spell_magic_missile'
     - name: 'MM Bot'
       race: 'Kobold'
       row: Back
       traits:
+      - 'wise'
       - 'spell_magic_missile'
     - name: 'MM Bot'
       race: 'Kobold'
       row: Back
       traits:
+      - 'wise'
       - 'spell_magic_missile'
     - name: 'MM Bot'
       race: 'Kobold'
       row: Back
       traits:
-      - 'spell_magic_missile'
-    - name: 'MM Bot'
-      race: 'Kobold'
-      row: Back
-      traits:
+      - 'wise'
       - 'spell_magic_missile'
