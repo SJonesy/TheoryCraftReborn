@@ -2,7 +2,7 @@ name: 'Spell: Magic Missile'
 type: 'DirectDamage'
 power: 8
 pointCost: 8
-mana: 8
+mana: 7
 effects: []
 beneficial: false
 partyTarget: false

@@ -3,17 +3,26 @@ characters:
     - name: 'The Juggernaut'
       race: 'Orc'
       row: Front
-      items:
-      - 'Iron Sword'
-      - 'Iron Shield'
-      - 'Iron Breastplate'
-      - 'Iron Legplates'
-      - 'Belt of Giant Strength'
-      - 'Boots of Haste'
-      - 'Amulet of Resistance'
-      - 'Ring of Flame'
-    - name: 'Healer'
+      traits:
+      - 'mace'
+      - 'large_shield'
+      - 'plate_armor'
+      - 'spell_cure_serious_wounds'
+      - 'steroids'
+      - 'wise'
+    - name: 'The Juggernaut'
       race: 'Orc'
+      row: Front
+      traits:
+      - 'mace'
+      - 'large_shield'
+      - 'plate_armor'
+      - 'spell_cure_serious_wounds'
+      - 'steroids'
+      - 'wise'
+    - name: 'Healer'
+      race: 'Human'
       row: Middle
-      items:
-      - 'Holy Scepter'
+      traits:
+      - 'wise'
+      - 'spell_cure_light_wounds'

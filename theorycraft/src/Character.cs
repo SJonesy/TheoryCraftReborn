@@ -86,6 +86,9 @@ namespace theorycraft
 			this.AC += this.Stats[Stat.Dexterity] / 4;
 
             foreach (var t in this.Traits) {
+                if (t.Type != TraitType.StatChange)
+                    continue;
+
                 if (t.Stat == Stat.AC)
                     this.AC += t.Power;
 
