@@ -1,24 +1,26 @@
 name: 'Human Knights'
 characters:
-    - name: 'Human Knight'
+    - name: 'Human Mage Knight'
       race: 'Human'
       row: Front
       traits:
       - 'mace'
       - 'plate_armor'
+      - 'large_shield'
+      - 'spell_flame_wave'
+    - name: 'Human Mage Knight'
+      race: 'Human'
+      row: Front
+      traits:
+      - 'mace'
+      - 'plate_armor'
+      - 'large_shield'
+      - 'spell_flame_wave'
     - name: 'Human Cleric'
       race: 'Human'
       row: Middle
       traits:
       - 'spell_cure_serious_wounds'
       - 'plate_armor'
-    - name: 'Human Mage'
-      race: 'Human'
-      row: Back
-      traits:
-      - 'spell_flame_wave'
-    - name: 'Kobold Dagger'
-      race: 'Kobold'
-      row: Back
-      traits:
-      - 'dagger'
+      - 'large_shield'
+      - 'mace'

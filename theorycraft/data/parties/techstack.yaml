@@ -3,34 +3,26 @@ characters:
     - name: 'Tank'
       race: 'Orc'
       row: Front
-      items:
-      - 'Iron Dagger'
-      - 'Iron Shield'
-      - 'Iron Breastplate'
-      - 'Ring of Minor Protection'
+      traits:
+      - 'dagger'
+      - 'plate_armor'
+      - 'large_shield'
     - name: 'Healer'
       race: 'Human'
       row: Middle
-      items:
-      - 'Holy Scepter'
-    - name: 'Healer'
-      race: 'Human'
-      row: Middle
-      items:
-      - 'Holy Scepter'
-    - name: 'Nuker'
-      race: 'Human'
+      traits:
+      - 'spell_cure_serious_wounds'
+      - 'spell_cure_light_wounds'
+      - 'plate_armor'
+    - name: 'DPS'
+      race: 'Orc'
       row: Back
-      items:
-      - 'Tomb of Magic Missile'
-    - name: 'Nuker'
-      race: 'Human'
+      traits:
+      - 'mace'
+      - 'steroids'
+    - name: 'DPS'
+      race: 'Orc'
       row: Back
-      items:
-      - 'Tomb of Magic Missile'
-    - name: 'Nuker'
-      race: 'Human'
-      row: Back
-      items:
-      - 'Tomb of Magic Missile'
-
+      traits:
+      - 'mace'
+      - 'steroids'

@@ -1,0 +1,6 @@
+﻿name: 'Large Shield'
+type: 'StatChange'
+power: 8
+stat: 'AC'
+pointCost: 6
+effects: []

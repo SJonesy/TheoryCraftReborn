@@ -1,42 +1,41 @@
 name: 'Horde'
 characters:
-    - name: 'Kobold Rat'
+    - name: 'Front Line Dummy'
       race: 'Kobold'
       row: Front
       traits:
       - 'dagger'
-    - name: 'Kobold Rat'
+      - 'large_shield'
+      - 'spell_cure_serious_wounds'
+    - name: 'Front Line Dummy'
       race: 'Kobold'
       row: Front
       traits:
       - 'dagger'
-    - name: 'Kobold Rat'
+      - 'plate_armor'
+      - 'spell_cure_serious_wounds'
+    - name: 'MM Bot'
       race: 'Kobold'
-      row: Front
+      row: Back
       traits:
-      - 'dagger'
-    - name: 'Kobold Rat'
+      - 'spell_magic_missile'
+    - name: 'MM Bot'
       race: 'Kobold'
-      row: Front
+      row: Back
       traits:
-      - 'dagger'
-    - name: 'Kobold Rat'
+      - 'spell_magic_missile'
+    - name: 'MM Bot'
       race: 'Kobold'
-      row: Front
+      row: Back
       traits:
-      - 'dagger'
-    - name: 'Kobold Rat'
+      - 'spell_magic_missile'
+    - name: 'MM Bot'
       race: 'Kobold'
-      row: Front
+      row: Back
       traits:
-      - 'dagger'
-    - name: 'Kobold Rat'
+      - 'spell_magic_missile'
+    - name: 'MM Bot'
       race: 'Kobold'
-      row: Front
+      row: Back
       traits:
-      - 'dagger'
-    - name: 'Kobold Rat'
-      race: 'Kobold'
-      row: Front
-      traits:
-      - 'dagger'
+      - 'spell_magic_missile'

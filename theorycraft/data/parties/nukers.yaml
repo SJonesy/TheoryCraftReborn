@@ -10,8 +10,8 @@ characters:
     - name: 'MM Bot'
       race: 'Human'
       row: Back
-      items:
-      - 'Tomb of Magic Missile'
+      traits:
+      - 'spell_magic_missile'
     - name: 'MM Bot'
       race: 'Human'
       row: Back

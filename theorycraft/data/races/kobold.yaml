@@ -1,6 +1,6 @@
 name: 'Kobold'
 size: 'Small'
-points: 35
+points: 30
 traits: []
 stats:
     strength: 6

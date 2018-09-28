@@ -88,7 +88,7 @@ namespace theorycraft
 						case TraitType.GroupDamage:
 							foreach (Character target in hostileParty.CharacterList) {
 								Action targetedAction = new Action (action.Actor, target, action.Trait);
-								minDamage = (combatant.Stats [Stat.Intelligence] / 5);
+								minDamage = (combatant.Stats [Stat.Intelligence] / 4);
 								maxDamage = combatant.Stats [Stat.Intelligence] + action.Trait.Power;
 								DoSingleDamage (targetedAction, minDamage, maxDamage, rand);
 							}

@@ -88,6 +88,9 @@ namespace theorycraft
             foreach (var t in this.Traits) {
                 if (t.Stat == Stat.AC)
                     this.AC += t.Power;
+
+                if (this.Stats.ContainsKey(t.Stat))
+                    this.Stats[t.Stat] += t.Power;
             }
 		}
 

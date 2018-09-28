@@ -1,27 +1,27 @@
 name: 'Orc Raiders'
 characters:
-    - name: 'Orc Raider'
+    - name: 'Orc Leader'
       race: 'Orc'
       row: Front
       traits:
       - 'mace'
+      - 'steroids'
+      - 'large_shield'
     - name: 'Orc Raider'
       race: 'Orc'
-      row: Front
+      row: Middle
       traits:
       - 'mace'
+      - 'steroids'
     - name: 'Orc Raider'
       race: 'Orc'
-      row: Front
+      row: Middle
       traits:
       - 'mace'
+      - 'steroids'
     - name: 'Orc Raider'
       race: 'Orc'
-      row: Front
+      row: Middle
       traits:
       - 'mace'
-    - name: 'Kobold Rat'
-      race: 'Kobold'
-      row: Front
-      traits:
-      - 'dagger'
+      - 'steroids'

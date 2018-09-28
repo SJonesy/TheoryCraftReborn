@@ -6,5 +6,5 @@ mana: 15
 effects: []
 beneficial: true
 partyTarget: false
-text: "@target briefly glows with a bright white light and is healed for @healing from @actor's cure light wounds."
+text: "@target briefly glows with a bright white light and is healed for @healing from @actor's cure serious wounds."
 textColor: 'white'
