@@ -1,0 +1,10 @@
+﻿name: 'Spell: Cure All'
+type: 'GroupHealing'
+power: 4
+pointCost: 12
+mana: 7
+effects: []
+beneficial: true
+partyTarget: true
+text: "@target briefly glows white and is healed for @healing from @actor's cure all spell."
+textColor: 'white'

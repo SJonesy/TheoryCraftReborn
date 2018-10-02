@@ -1,7 +1,7 @@
 name: 'Tech Stack'
 characters:
     - name: 'Tank'
-      race: 'Orc'
+      race: 'Kobold'
       row: Front
       traits:
       - 'dagger'
@@ -20,9 +20,9 @@ characters:
       traits:
       - 'mace'
       - 'steroids'
-    - name: 'DPS'
-      race: 'Orc'
+    - name: 'Magic DPS'
+      race: 'Human'
       row: Back
       traits:
-      - 'mace'
-      - 'steroids'
+      - 'gifted'
+      - 'spell_magic_missile'

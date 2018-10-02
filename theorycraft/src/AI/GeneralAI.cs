@@ -18,6 +18,12 @@ namespace theorycraft
 			this.FriendlyParty = friendlyParty;
 			this.HostileParty = hostileParty;
 
+			Trait groupHealingTrait = GetGroupHealingTrait();
+            int totalGroupHealth = friendlyParty.CharacterList.Sum(x => x.Hitpoints);
+            int totalGroupMaxHealth = friendlyParty.CharacterList.Sum(x => x.MaxHitpoints);
+            if (groupHealingTrait != null && Actor.Mana >= groupHealingTrait.Mana && totalGroupMaxHealth - totalGroupHealth > 100)
+				return new Action(Actor, friendlyParty, groupHealingTrait);
+
 			Trait directHealingTrait = GetDirectHealingTrait();
 			Character injuredAlly = FindLowestHPInjuredAlly();
 			if (directHealingTrait != null && Actor.Mana >= directHealingTrait.Mana && injuredAlly != null)
@@ -58,6 +64,11 @@ namespace theorycraft
 
 		private Trait GetDirectHealingTrait() {
 			return Actor.Traits.Find (x => x.Type == TraitType.DirectHealing);
+		}
+
+		private Trait GetGroupHealingTrait()
+		{
+            return Actor.Traits.Find(x => x.Type == TraitType.GroupHealing);
 		}
 
         private List<Trait> GetDirectHealingActions() {

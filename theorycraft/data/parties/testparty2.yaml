@@ -16,11 +16,37 @@ characters:
       - 'plate_armor'
       - 'large_shield'
       - 'spell_flame_wave'
+    - name: 'Human Mage Knight'
+      race: 'Human'
+      row: Front
+      traits:
+      - 'mace'
+      - 'plate_armor'
+      - 'large_shield'
+      - 'spell_flame_wave'
+    - name: 'Human Mage Knight'
+      race: 'Human'
+      row: Front
+      traits:
+      - 'mace'
+      - 'plate_armor'
+      - 'large_shield'
+      - 'spell_flame_wave'
     - name: 'Human Cleric'
       race: 'Human'
       row: Middle
       traits:
       - 'spell_cure_serious_wounds'
+      - 'spell_cure_all'
+      - 'plate_armor'
+      - 'large_shield'
+      - 'mace'
+    - name: 'Human Cleric'
+      race: 'Human'
+      row: Middle
+      traits:
+      - 'spell_cure_serious_wounds'
+      - 'spell_cure_all'
       - 'plate_armor'
       - 'large_shield'
       - 'mace'

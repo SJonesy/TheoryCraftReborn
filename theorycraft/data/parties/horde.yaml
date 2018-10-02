@@ -4,37 +4,70 @@ characters:
       race: 'Kobold'
       row: Front
       traits:
-      - 'dagger'
       - 'large_shield'
-      - 'spell_cure_serious_wounds'
-    - name: 'Front Line Dummy'
+      - 'plate_armor'
+    - name: 'Kobold'
       race: 'Kobold'
-      row: Front
+      row: Middle
       traits:
       - 'dagger'
-      - 'plate_armor'
-      - 'spell_cure_serious_wounds'
-    - name: 'MM Bot'
+    - name: 'Kobold'
+      race: 'Kobold'
+      row: Middle
+      traits:
+      - 'dagger'
+    - name: 'Kobold'
+      race: 'Kobold'
+      row: Middle
+      traits:
+      - 'dagger'
+    - name: 'Kobold'
+      race: 'Kobold'
+      row: Middle
+      traits:
+      - 'dagger'
+    - name: 'Kobold'
+      race: 'Kobold'
+      row: Middle
+      traits:
+      - 'dagger'
+    - name: 'Kobold'
+      race: 'Kobold'
+      row: Middle
+      traits:
+      - 'dagger'
+    - name: 'Kobold'
+      race: 'Kobold'
+      row: Middle
+      traits:
+      - 'dagger'
+    - name: 'Kobold'
+      race: 'Kobold'
+      row: Middle
+      traits:
+      - 'dagger'
+    - name: 'Kobold'
+      race: 'Kobold'
+      row: Middle
+      traits:
+      - 'dagger'
+    - name: 'Kobold'
+      race: 'Kobold'
+      row: Middle
+      traits:
+      - 'dagger'
+    - name: 'Kobold'
+      race: 'Kobold'
+      row: Middle
+      traits:
+      - 'dagger'
+    - name: 'Kobold'
+      race: 'Kobold'
+      row: Middle
+      traits:
+      - 'dagger'
+    - name: 'Kobold Cleric'
       race: 'Kobold'
       row: Back
       traits:
-      - 'wise'
-      - 'spell_magic_missile'
-    - name: 'MM Bot'
-      race: 'Kobold'
-      row: Back
-      traits:
-      - 'wise'
-      - 'spell_magic_missile'
-    - name: 'MM Bot'
-      race: 'Kobold'
-      row: Back
-      traits:
-      - 'wise'
-      - 'spell_magic_missile'
-    - name: 'MM Bot'
-      race: 'Kobold'
-      row: Back
-      traits:
-      - 'wise'
-      - 'spell_magic_missile'
+      - 'spell_cure_all'

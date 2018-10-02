@@ -93,6 +93,14 @@ namespace theorycraft
 								DoSingleDamage (targetedAction, minDamage, maxDamage, rand);
 							}
 							break;
+                        case TraitType.GroupHealing:
+                            foreach (Character target in friendlyParty.CharacterList) {
+                                Action targetedAction = new Action(action.Actor, target, action.Trait);
+								minHeal = action.Trait.Power;
+								maxHeal = combatant.Stats[Stat.Wisdom] + action.Trait.Power;
+                                DoSingleHealing (targetedAction, minHeal, maxHeal, rand);
+                            }
+                            break;
 					}
 
 					// Check for victory
@@ -174,8 +182,6 @@ namespace theorycraft
 
 		private void DoSingleHealing(Action action, int minHealing, int maxHealing, Random rand) {
 			int healing = rand.Next(minHealing, maxHealing);
-			if (action.Trait.Mana > 0)
-				action.Actor.Mana -= action.Trait.Mana;
 			action.TargetCharacter.Hitpoints += healing;
 			Console.ForegroundColor = GetColor(action.Trait.TextColor);
 			if (action.Trait.BackgroundColor != null)
