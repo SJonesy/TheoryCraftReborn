@@ -6,22 +6,36 @@ characters:
       traits:
       - 'mace'
       - 'steroids'
+    - name: 'Orc Raider'
+      race: 'Orc'
+      row: Middle
+      traits:
+      - 'mace'
+      - 'steroids'
+    - name: 'Orc Raider'
+      race: 'Orc'
+      row: Middle
+      traits:
+      - 'mace'
+      - 'steroids'
+    - name: 'Orc Raider'
+      race: 'Orc'
+      row: Middle
+      traits:
+      - 'mace'
+      - 'steroids'
+    - name: 'Orc Raider'
+      race: 'Orc'
+      row: Middle
+      traits:
+      - 'mace'
+      - 'steroids'
+    - name: 'Human Cleric'
+      race: 'Human'
+      row: Middle
+      traits:
+      - 'spell_cure_serious_wounds'
+      - 'spell_cure_all'
+      - 'plate_armor'
       - 'large_shield'
-    - name: 'Orc Raider'
-      race: 'Orc'
-      row: Middle
-      traits:
       - 'mace'
-      - 'steroids'
-    - name: 'Orc Raider'
-      race: 'Orc'
-      row: Middle
-      traits:
-      - 'mace'
-      - 'steroids'
-    - name: 'Orc Raider'
-      race: 'Orc'
-      row: Middle
-      traits:
-      - 'mace'
-      - 'steroids'

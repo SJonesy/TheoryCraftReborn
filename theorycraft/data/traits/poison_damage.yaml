@@ -1,0 +1,6 @@
+﻿name: 'Poison Damage'
+type: 'DirectDamage'
+power: 3
+text: "@actor takes @damage damage from poison."
+textColor: 'darkgreen'
+resistType: 'poison'

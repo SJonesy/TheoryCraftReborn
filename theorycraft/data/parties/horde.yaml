@@ -6,11 +6,11 @@ characters:
       traits:
       - 'large_shield'
       - 'plate_armor'
-    - name: 'Kobold'
+    - name: 'Kobold Alchemist'
       race: 'Kobold'
-      row: Middle
+      row: Front
       traits:
-      - 'dagger'
+      - 'group_weapon_poison'
     - name: 'Kobold'
       race: 'Kobold'
       row: Middle

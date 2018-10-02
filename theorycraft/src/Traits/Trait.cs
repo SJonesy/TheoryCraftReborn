@@ -1,5 +1,7 @@
 ﻿using System;
 using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+using System.IO;
 
 namespace theorycraft
 {
@@ -13,6 +15,7 @@ namespace theorycraft
         public Stat Stat { get; set; }
 		public int Power { get; set; }
 		public Effect[] Effects { get; set; }
+        public Buff[] Buffs { get; set; }
 		public string Text { get; set; }
 		public string TextColor { get; set; }
 		public string BackgroundColor { get; set; }
@@ -23,6 +26,18 @@ namespace theorycraft
 		public override string ToString ()
 		{
 			return Name;
+		}
+
+		public static Trait GetTrait(String t)
+		{
+			var yaml = File.ReadAllText("data/traits/" + t + ".yaml");
+			var deserializer = new DeserializerBuilder()
+				.WithNamingConvention(new CamelCaseNamingConvention())
+				.Build();
+
+			var trait = deserializer.Deserialize<Trait>(yaml);
+
+			return trait;
 		}
 
 	}

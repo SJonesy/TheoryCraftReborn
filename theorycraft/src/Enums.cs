@@ -27,8 +27,13 @@ namespace theorycraft
 
 	public enum Effect
 	{
-		Poison,
-		Aegis
+		Poison
+	}
+
+    public enum Buff
+	{
+		Aegis,
+		PoisonedWeapon
 	}
 
 	public enum Row

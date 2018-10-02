@@ -24,14 +24,11 @@ characters:
       - 'plate_armor'
       - 'large_shield'
       - 'spell_flame_wave'
-    - name: 'Human Mage Knight'
+    - name: 'Human Alchemist'
       race: 'Human'
       row: Front
       traits:
-      - 'mace'
-      - 'plate_armor'
-      - 'large_shield'
-      - 'spell_flame_wave'
+      - 'group_weapon_poison'
     - name: 'Human Cleric'
       race: 'Human'
       row: Middle

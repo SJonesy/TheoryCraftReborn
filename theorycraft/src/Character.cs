@@ -34,6 +34,7 @@ namespace theorycraft
 		public Dictionary<Resist, float> Resists { get; set; }
 		public Boolean Alive { get; set; }
 		public List<Effect> Effects { get; set; }
+        public List<Buff> Buffs { get; set; }
 
 		public Character () { }
 
@@ -58,6 +59,8 @@ namespace theorycraft
 			this.BaseResists = race.Resists;
 			this.PointCost += race.Points;
 			this.Traits = new List<Trait>();
+            this.Effects = new List<Effect>();
+            this.Buffs = new List<Buff>();
 			this.Alive = true;
 			this.Row = row;
             this.ManaRegen = 0;

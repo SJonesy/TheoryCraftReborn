@@ -48,6 +48,17 @@ namespace theorycraft
 					if (!combatant.Alive)
 						continue;
 
+                    if (combatant.Effects.Contains(Effect.Poison)) {
+                        Trait poisonDamage = Trait.GetTrait("poison_damage");
+                        Action poisonAction = new Action(combatant, combatant, poisonDamage);
+                        int minDamage = 1;
+                        int maxDamage = poisonAction.Trait.Power;
+                        DoSingleDamage(poisonAction, minDamage, maxDamage, rand);
+                    }
+
+					if (!combatant.Alive)
+						continue;
+
 					if (combatant.Mana < combatant.MaxMana)
 						combatant.Mana += combatant.ManaRegen;
 
@@ -95,10 +106,18 @@ namespace theorycraft
 							break;
                         case TraitType.GroupHealing:
                             foreach (Character target in friendlyParty.CharacterList) {
+                                if (!target.Alive)
+                                    continue;
                                 Action targetedAction = new Action(action.Actor, target, action.Trait);
 								minHeal = action.Trait.Power;
 								maxHeal = combatant.Stats[Stat.Wisdom] + action.Trait.Power;
                                 DoSingleHealing (targetedAction, minHeal, maxHeal, rand);
+                            }
+                            break;
+                        case TraitType.GroupBuff:
+                            foreach (Character target in friendlyParty.CharacterList) {
+                                Action targetedAction = new Action(action.Actor, target, action.Trait);
+                                DoSingleBuff(targetedAction);
                             }
                             break;
 					}
@@ -150,6 +169,24 @@ namespace theorycraft
 			return new Party ();
 		}
 
+        private void DoSingleBuff(Action action) {
+            foreach (Buff buff in action.Trait.Buffs) {
+                if (!action.TargetCharacter.Buffs.Contains(buff)) {
+                    action.TargetCharacter.Buffs.Add(buff);
+                }
+            }
+
+			Console.ForegroundColor = GetColor(action.Trait.TextColor);
+			if (action.Trait.BackgroundColor != null)
+				Console.BackgroundColor = GetColor(action.Trait.BackgroundColor);
+			string output = action.Trait.Text
+				.Replace("@actor", action.Actor.Name)
+				.Replace("@target", action.TargetCharacter.Name);
+			Console.Write(output);
+			Console.ResetColor();
+			Console.Write("\n");
+        }
+
 		private void DoSingleDamage(Action action, int minDamage, int maxDamage, Random rand) {
 			int damage = rand.Next(minDamage, maxDamage);
 			if (action.Trait.Type == TraitType.Melee)
@@ -159,8 +196,17 @@ namespace theorycraft
 				action.TargetCharacter.Resists.TryGetValue(action.Trait.ResistType, out resist);
 				damage -= (int)(resist * damage);
 			}
-			if (damage <= 0)
-				damage = 1;
+            if (damage <= 0) {
+                damage = 1;
+            }
+            else if (action.Actor.Buffs.Contains(Buff.PoisonedWeapon) && !action.TargetCharacter.Effects.Contains(Effect.Poison)) {
+                action.TargetCharacter.Effects.Add(Effect.Poison);
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("{0} has been poisoned by {1}.", action.TargetCharacter.Name, action.Actor.Name);
+				Console.ResetColor();
+				Console.Write("\n");
+                action.Actor.Buffs.Remove(Buff.PoisonedWeapon);
+            }
 			action.TargetCharacter.Hitpoints -= damage;
 			Console.ForegroundColor = GetColor(action.Trait.TextColor);
 			if (action.Trait.BackgroundColor != null)
@@ -172,7 +218,8 @@ namespace theorycraft
 			Console.Write(output);
 			Console.ResetColor();
 			Console.Write("\n");
-			if (action.TargetCharacter.Hitpoints <= 0) {
+         
+            if (action.TargetCharacter.Hitpoints <= 0) {
 				action.TargetCharacter.Alive = false;
 				Console.ForegroundColor = ConsoleColor.DarkRed;
 				Console.WriteLine("{0} has died.", action.TargetCharacter.Name);
@@ -182,6 +229,13 @@ namespace theorycraft
 
 		private void DoSingleHealing(Action action, int minHealing, int maxHealing, Random rand) {
 			int healing = rand.Next(minHealing, maxHealing);
+            if (action.TargetCharacter.Effects.Contains(Effect.Poison))
+                healing = (int)Math.Round(healing * .66);
+            healing = Math.Min(healing, action.TargetCharacter.MaxHitpoints - action.TargetCharacter.Hitpoints);
+
+            if (healing == 0)
+                return;
+
 			action.TargetCharacter.Hitpoints += healing;
 			Console.ForegroundColor = GetColor(action.Trait.TextColor);
 			if (action.Trait.BackgroundColor != null)

@@ -29,6 +29,17 @@ namespace theorycraft
 			if (directHealingTrait != null && Actor.Mana >= directHealingTrait.Mana && injuredAlly != null)
 				return new Action(Actor, injuredAlly, directHealingTrait);
 
+            List<Trait> groupBuffTraits = GetGroupBuffTraits();
+            foreach (Trait groupBuffTrait in groupBuffTraits) {
+                if (Actor.Mana >= groupBuffTrait.Mana) {
+					foreach (Buff buff in groupBuffTrait.Buffs)
+					{
+						if (friendlyParty.CharacterList.FindAll(x => x.Buffs.Contains(buff)).Count < friendlyParty.CharacterList.Count)
+							return new Action(Actor, friendlyParty, groupBuffTrait);
+					}                    
+                }
+            }
+                
 			Trait groupDamageTrait = GetGroupDamageTrait();
 			int aliveEnemiesCount = hostileParty.CharacterList.FindAll (x => x.Alive).Count;
 			if (groupDamageTrait != null && Actor.Mana >= groupDamageTrait.Mana && aliveEnemiesCount > 1)
@@ -60,6 +71,11 @@ namespace theorycraft
 
         private List<Trait> GetDirectDamageActions() {
 			return Actor.Traits.FindAll (x => x.Type == TraitType.DirectDamage);
+		}
+
+        private List<Trait> GetGroupBuffTraits()
+		{
+            return Actor.Traits.FindAll(x => x.Type == TraitType.GroupBuff);
 		}
 
 		private Trait GetDirectHealingTrait() {

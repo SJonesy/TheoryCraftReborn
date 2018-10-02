@@ -1,0 +1,11 @@
+﻿name: 'Group Weapon Poison'
+type: 'GroupBuff'
+power: 1
+pointCost: 30
+mana: 0
+effects: []
+buffs: ['PoisonedWeapon']
+beneficial: true
+partyTarget: true
+text: "@target dips his weapon into @actor's poison."
+textColor: 'darkgreen'
